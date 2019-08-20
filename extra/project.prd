@@ -1,0 +1,184 @@
+[Options]
+LocalPath=C:\Program Files\EasyPHP1-8\www
+FindText=panierAjout
+SaveSession=1
+DialogFont=Tahoma
+Highlight=0
+LocalPort=81
+FTPPassive=0
+FTPHost=
+FTPPort=21
+FTPUser=
+FTPPasswordSave=vORl7crJu9o=
+FTPServerPath=
+FTPProxyHost=
+FTPProxyPort=3128
+FTPProxyUser=
+FTPProxyType=None
+ExternPath=http://www.transant.com
+InternBrowser=InternetExplorer
+DefaultDoc=
+ServerTimeout=0
+Font=Courier New
+FTPcfname=55
+Parameters=-q
+ReplaceText=
+BrowserPath=
+
+[Edit]
+Edge=100
+
+[TODO]
+UriFormat=
+FileExtension=
+
+[Registry]
+multi=0
+
+[UPDATE]
+Version=
+Download=
+Description=
+
+[History]
+Last=129
+1=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\accueil.php
+2=C:\Program Files\EasyPHP1-8\www\Antillas\checkout6.php
+3=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_general_select.php
+4=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_general_divers.php
+5=C:\Program Files\EasyPHP1-8\www\bak\checkout5-1.php
+6=C:\Program Files\EasyPHP1-8\www\bak\All\public_html\lib\general\lib\library_panier.php
+7=C:\Program Files\EasyPHP1-8\www\Antillas\checkout5-1.php
+8=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_general_insert.php
+9=C:\Program Files\EasyPHP1-8\www\Antillas\index.php
+10=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_panier.php
+11=C:\Program Files\EasyPHP1-8\www\Antillas\panier.php
+12=C:\Program Files\EasyPHP1-8\www\Antillas\produit.php
+13=C:\Program Files\EasyPHP1-8\www\Antillas\produits_show.php
+14=C:\Program Files\EasyPHP1-8\www\Antillas\accueil.php
+15=C:\Program Files\EasyPHP1-8\www\Antillas\panier_show.php
+16=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_declined.php
+17=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_declined_msg.php
+18=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_accepted_msg.php
+19=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_accepted.php
+20=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_recherche.php
+21=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\produits_ajout.php
+22=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\catalogue_form.inc
+23=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\produits_form.inc
+24=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\produits_global.inc
+25=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\cli_messfr.inc
+26=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\produits_recherche.php
+27=C:\Program Files\EasyPHP1-8\www\Antillas\lib\config.php
+28=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_extranet_select.php
+29=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_extranet_produits.php
+30=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\test.html
+31=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\var_extra.inc
+32=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\sessionsave.inc
+33=C:\Program Files\EasyPHP1-8\www\Antillas\banniere_fr2.php
+34=C:\Program Files\EasyPHP1-8\www\Antillas\bas_page_fr2.php
+35=C:\Program Files\EasyPHP1-8\www\Antillas\banniere_fr.php
+36=C:\Program Files\EasyPHP1-8\www\Antillas\lib\validationclients.js
+37=C:\Program Files\EasyPHP1-8\www\bak\All\public_html\checkout5-1.php
+38=C:\Program Files\EasyPHP1-8\www\Antillas\account_create_action.php
+39=C:\Program Files\EasyPHP1-8\www\Antillas\facture_historique.php
+40=C:\Program Files\EasyPHP1-8\www\Antillas\account_create.php
+41=C:\Program Files\EasyPHP1-8\www\Antillas\mon_compte.php
+42=C:\Program Files\EasyPHP1-8\www\Antillas\main-avecstats.php
+43=C:\Program Files\EasyPHP1-8\www\Antillas\main1.php
+44=C:\Program Files\EasyPHP1-8\www\Antillas\connexion.php
+45=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_accepted1.php
+46=C:\Program Files\EasyPHP1-8\www\bak\All\public_html\checkout_accepted.php
+47=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_accepted-avantvoucher.php
+48=C:\Program Files\EasyPHP1-8\www\Hermes\transconsulte.php
+49=C:\Program Files\EasyPHP1-8\www\Hermes\clientrecherche.php
+50=C:\Program Files\EasyPHP1-8\www\Antillas\checkout2.php
+51=C:\Program Files\EasyPHP1-8\www\Hermes\clientajout.php
+52=C:\Program Files\EasyPHP1-8\www\Antillas\main.php
+53=C:\Program Files\EasyPHP1-8\www\bak\All\public_html\lib\general\lib\library_general_insert.php
+54=C:\Program Files\EasyPHP1-8\www\bak\All\public_html\lib\general\lib\library_general_update.php
+55=C:\Program Files\EasyPHP1-8\www\Hermes\clientform.inc
+56=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_extranet_insert.php
+57=C:\Program Files\EasyPHP1-8\www\Hermes\listtop.php
+58=C:\Program Files\EasyPHP1-8\www\Hermes\transform.inc
+59=C:\Program Files\EasyPHP1-8\www\Hermes\letform.inc
+60=C:\Documents and Settings\Denis\Bureau\temp.txt
+61=C:\Program Files\EasyPHP1-8\www\Antillas\checkout6stop.php
+62=C:\Program Files\EasyPHP1-8\www\Antillas\checkout6-3.php
+63=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\produits\produits_modifier.php
+64=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\produits\produits_set_recherche.php
+65=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\var.inc
+66=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\produits\produits_creer.php
+67=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\catalogue\catalogue_modifier.php
+68=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\catalogue\catalogue_creer.php
+69=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\cli_global.inc
+70=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_champs.inc
+71=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_form.inc
+72=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_valide.inc
+73=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_lst.php
+74=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_lstframe.php
+75=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_consulte.php
+76=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\clientlstframe.php
+77=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\calcul.php
+78=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\client_ajout.php
+79=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\javafich\ldmenufr.js
+80=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\mainfr.php
+81=C:\Program Files\EasyPHP1-8\www\Antillas\index2.php
+82=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\javafich\ldmenusp.js
+83=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\javafich\ldmenuen.js
+84=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\topmenuen.htm
+85=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\topmenusp.htm
+86=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\topmenufr.htm
+87=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\pagegestion.php
+88=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\login.php
+89=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\indexsp.html
+90=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\indexen.html
+91=C:\Program Files\EasyPHP1-8\www\Antillas\Extra\index.html
+92=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\head.php
+93=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\produits_modifier_action.php
+94=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\produits_modifier.php
+95=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\produits_creer.php
+96=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\catalogue\menu-ancien.php
+97=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\catalogue\menu.php
+98=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\catalogue\menu2.php
+99=C:\Program Files\EasyPHP1-8\www\Antillas\extranet\catalogue\index.php
+100=C:\transant\antillas1.sql
+101=C:\transant\antillas2.sql
+102=C:\transant\antillas_express_com_01.sql
+103=C:\Program Files\EasyPHP1-8\www\Antillas\checkout_moneris.php
+104=C:\Program Files\EasyPHP1-8\www\Hermes\clientvalide.inc
+105=C:\Program Files\EasyPHP1-8\www\Hermes\letmodif.inc
+106=C:\Program Files\EasyPHP1-8\www\Hermes\trslivreur.inc
+107=C:\Program Files\EasyPHP1-8\www\Hermes\trsreussi.php
+108=C:\Program Files\EasyPHP1-8\www\Hermes\trssignature.inc
+109=C:\Program Files\EasyPHP1-8\www\Hermes\trssaveais.php
+110=C:\Program Files\EasyPHP1-8\www\Antillas\left.php
+111=C:\Program Files\EasyPHP1-8\www\Antillas\banniere_fr1.php
+112=C:\Program Files\EasyPHP1-8\www\Antillas\topmenu2.php
+113=C:\Program Files\EasyPHP1-8\www\Antillas\topmenu.php
+114=C:\Program Files\EasyPHP1-8\www\Antillas\topmenu1.php
+115=C:\Program Files\EasyPHP1-8\www\Antillas\bas_page_fr.php
+116=C:\Program Files\EasyPHP1-8\www\Antillas\left1.php
+117=C:\Program Files\EasyPHP1-8\www\Antillas\recherche.php
+118=C:\Program Files\EasyPHP1-8\www\Antillas\index1.php
+119=C:\Program Files\EasyPHP1-8\www\Antillas\menu_gauche_fr.php
+120=C:\Program Files\EasyPHP1-8\www\bak\All\www\connexion.php
+121=C:\Program Files\EasyPHP1-8\www\Antillas\Connections\antillasexpress.asp
+122=C:\Program Files\EasyPHP1-8\www\Antillas\head.php
+123=C:\Program Files\EasyPHP1-8\www\Antillas\checkout1.php
+124=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\test.php
+125=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\menu.php
+126=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_general_update.php
+127=C:\Program Files\EasyPHP1-8\www\Antillas\lib\general\lib\library_general_divers.good.php
+128=C:\Program Files\EasyPHP1-8\www\Antillas\produit_big_picture.php
+129=C:\Program Files\EasyPHP1-8\www\Antillas\albumphoto.php
+
+[Session]
+Active=0
+Last=0
+
+[Externals]
+Last=0
+
+[Debug]
+Last=0
+

@@ -1,0 +1,26 @@
+User-agent:  * 
+ 
+Disallow:  /bak/
+ 
+Disallow:  /extra/
+
+Disallow:  /photo/
+
+Disallow:  /zif/
+
+Disallow:  /lib/
+
+Disallow:  /stats/
+
+Disallow:  /styles/
+
+Disallow:  /compteur/
+
+Disallow:  /antillas/
+Disallow:  /hermes/
+Disallow:  /famille/
+Disallow:  /trudeau/
+
+Disallow:  /erreur.php
+
+Disallow:  /erreur404.php

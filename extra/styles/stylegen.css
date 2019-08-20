@@ -1,0 +1,47 @@
+/* 
+    BUT : Feuille de style générale de l'application
+	AUTEUR : Denis Léveillé    DATE : 04-01-21
+*/
+
+
+BODY { font-family: arial !important; }
+* { font-family: arial !important; }
+
+
+
+BODY { font-size: 10pt !important; }
+ * { font-size: 10pt !important; }
+
+
+big { font-size: larger !important; }
+small { font-size: smaller !important; }
+
+.inputvoid { 
+	height: 20px;
+	font-style:italic; 
+	font-weight:normal; 
+	background-color: #CCCCCC;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.inputview { 
+	font-weight:bold; 
+	background-color: #CCCCCC;  
+	height: 20px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+.boutChx {
+		 font-style:italic; font-weight:bold;
+}
+
+.boutOk {
+		 font-size: small; font-style:italic;
+}
+
+:focus  { outline: groove }
+active { outline: thick solid red }
+	

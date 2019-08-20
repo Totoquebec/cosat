@@ -1,0 +1,726 @@
+# ==============================================================================
+# .htaccess file for  http://www.cosat.biz
+# ------------------------------------------------------------------------------
+# Feel free to copy and distribute this file, but keep in mind that you'll have
+# to make some modifications to have it running on your own system.
+# I advise you to look for the string "html4", to understand any of the commands
+# in which it appears, and to adapt them to your needs.
+# ------------------------------------------------------------------------------
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# ------------------------------------------------------------------------------
+# Using this file improperly can make your site unreachable.
+# If you see a "500 Internal Server Error" message, just remove your
+# .htaccess file and edit it.
+# ------------------------------------------------------------------------------
+# Questions? Comments? contact[at]html4.com
+# ==============================================================================
+# Compulsory: tells Apache it will have to rewrite some requests.
+#-------------------------------------------------------------------------------
+# AuthName www.cosat.biz
+# IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti* */.inc
+#*******************************************************************************
+# A VOIR , 
+# L'instruction à modifier dans le httpd.conf ou dans un .htaccess : 
+# AddDefaultCharset ISO-8859-1
+#*******************************************************************************
+
+RewriteEngine on
+
+# ==============================================================================
+# Error pages
+#-------------------------------------------------------------------------------
+ErrorDocument 400 /erreur.php?id=400
+ErrorDocument 401 /erreur.php?id=401
+ErrorDocument 403 /erreur403.php
+ErrorDocument 404 /erreur404.php
+ErrorDocument 405 /erreur.php?id=405
+ErrorDocument 500 /erreur.php?id=500
+
+# ==============================================================================
+# replace %3F with ? comme dans www.cosat.biz/photoget_web.php%3FNo%3D5%26Idx%3D2 
+#RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.*)\%3[Ff](.*)\ HTTP/ [NC] 
+#RewriteRule \.*$ http://www.mysite.com/%1?%2 [R=301,L] 
+# =============== Marche pas
+# =============== la commande RewriteRule \.*$ http://www.cosat.biz//%1?No=%2&Idx=%3  [R=301,L]
+# =============== retourne http://www.cosat.biz//photoget_web.php?No=?No=%253D5%2526Idx%253D2&Idx= 
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\%]+)\%3[Ff]([^\ ]+)\ HTTP/  
+RewriteRule \.*$ http://www.cosat.biz/gifs/lelogo.gif [R=301,L] 
+# ==============================================================================
+
+RewriteRule ^/?photo/([0-9]+)/([0-9]+)$ photoget_web.php?No=$1&Idx=$2 [L]
+
+#-------------------------------------------------------------------------------
+# Un bon site WEB est un site sans erreur 404, alors il doit y a voir une
+# redirection pour toute page soustraite du site
+################################################################################
+Redirect permanent /informatique/ http://www.cosat.biz/index.php?%1
+Redirect permanent /cellulaire/ http://www.cosat.biz/index.php?%1
+Redirect permanent /fete.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /princinfo.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /speciaux.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /systeme.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /systemeX2.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /drivers.php http://www.cosat.biz/support.php?%1 
+Redirect permanent /lang.php http://www.cosat.biz/support.php?%1 
+#--- Ici pour contrer les sniffer de porte sur WordPress et Joomla
+Redirect permanent /admin/spaw/spacer.gif http://www.cosat.biz/index.php
+Redirect permanent /wp-login.php http://www.cosat.biz/index.php
+Redirect permanent /administrator/ http://www.cosat.biz/index.php
+Redirect permanent /admin.php http://www.cosat.biz/index.php
+Redirect permanent /wp-admin/ http://www.cosat.biz/index.php
+Redirect permanent /wordpress/ http://www.cosat.biz/index.php
+Redirect permanent /joomla  http://www.cosat.biz/index.php
+Redirect permanent /wp  http://www.cosat.biz/index.php
+Redirect permanent /drupal   http://www.cosat.biz/index.php
+Redirect permanent /blog/   http://www.cosat.biz/index.php
+Redirect permanent /wp-content/   http://www.cosat.biz/index.php
+Redirect permanent /forum/   http://www.cosat.biz/index.php
+Redirect permanent /status   http://www.cosat.biz/index.php
+Redirect permanent /console/css/dashboard-min.css    http://www.cosat.biz/index.php
+
+################################################################################
+# Éviter que les gens crée un hotlink sur mes images. - source : html4.com
+# 1iere partie pour les requetes directes
+# 2ieme partie pour les requêtes dans un «frameset», exemple sur page résultat recherche d'image de Google.
+# 3ieme pour éviter une boucle.
+# 4ieme est pour Fourth is to match only images with case-insensivity, as the [NC] flag means
+# "no case".
+#-------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !(localhost|cosat\.biz) [NC]
+RewriteCond %{REQUEST_URI} !logo\.gif [NC]
+RewriteCond %{REQUEST_URI} \.(jp..?|gif|png|swf)$ [NC]
+RewriteCond %{REQUEST_URI} \.js(\W.*)$ [NC]
+RewriteRule ^.*$ http://www.cosat.biz/gifs/logo.gif [R,L]
+
+
+# As this site is about referer spam, we do not want to block a search from a 
+# search engine if the search is about a referer spam.
+# For instance :
+#     http://www.google.com/search
+#                                 ?hl=en
+#                                 &lr=
+#                                 &rls=GGLD%2CGGLD:2005-04%2CGGLD:en
+#                                 &q=naked+mature+women+naked-mature-women.org
+# So there will be no blocking of any kind for their majesties.
+# That may cause some dirty query strings to go through. If a spammer spoofs his
+# referer string with, let's say :
+#          http://www.google.fr/search?hl=en&q=phentermine&btnG=Google+Search
+# You will get the result page for the query "phentermine".
+# You can either refer to HTTP_REFERER or HTTP_HOST, but I'm experiencing
+# disapointing results with HTTP_HOST.
+# IMPORTANT : HTTP_HOST does not begin with "http://" !!!
+# As this site is about spam, some of its URLs may contain otherwise filtered
+# keywords, so, we must avoid to block some legit requests.
+# This list also contains (nearly) all the search engines that have issued a
+# request to my site.
+# ------------------------------------------------------------------------------
+# The keywords translate|translation|translatedPage have been added html.com's name 
+# due to a vulnerability. "altavista\.com" had to be changed too.
+# You will learn more soon at :  http://localhost/www.html4.com/mime/markup/php/how_to_fr/how_to_system_fr/how_to_system_19.php
+# This page may not be on line yet.
+# LOL: my little crew of spammers have tried a site (freetranslation.com) which
+# used another URL syntax, but which matched the regexp.
+RewriteCond %{HTTP_REFERER} ^http://((\w)+\.?)*\W(babelfish|translate|translation|translatedPage).*(&[\w]+=http((://)|(://))www\.cosat\.biz((/)|(/))) [NC]
+RewriteRule ^(.*)$ - [L]
+# Google's cache
+RewriteCond %{HTTP_REFERER} (search\?q=cache:[\w\-]+:www\.cosat\.biz) [NC]
+RewriteRule ^(.*)$ - [L]
+# ------------------------------------------------------------------------------
+RewriteCond %{REQUEST_URI} /((buscador|buscar|busqueda|pesquisa|recherche|search|zoeken)(\?|\.|=))|urlcheck|google|(\?(p|q)=)|(&(url|redir)=) [NC]
+RewriteRule ^(.*)$ - [L]
+RewriteCond %{HTTP_REFERER} ^http://([a-z0-9\-]+\.)*(buscador|buscar|busqueda|pesquisa|recherche|search|zoeken)\. [NC]
+RewriteRule ^(.*)$ - [L]
+# ------------------------------------------------------------------------------        
+# The user-agent string may be faked, so you may comment this last rule.
+RewriteCond %{HTTP_USER_AGENT} (bot\.(htm|php))|slurp|jeeves|teoma|@|crawl|robot [NC]
+RewriteRule ^(.*)$ - [L]
+# ------------------------------------------------------------------------------
+# Nor that (used to pass linux commands as parameters to a script)
+RewriteCond %{QUERY_STRING} &cmd=
+RewriteRule .* - [F,L]
+# Nor that
+RewriteCond %{REQUEST_URI} sohoadmin [OR]
+RewriteCond %{QUERY_STRING} sohoadmin
+RewriteRule .* - [F,L]
+
+RewriteCond %{QUERY_STRING} (mosConfig|tinyMCE)_\w+=
+RewriteRule .* - [F,L]
+
+RewriteCond %{QUERY_STRING} waroot=http
+RewriteRule .* - [F,L]
+
+RewriteCond %{QUERY_STRING} =ftp
+RewriteRule .* - [F,L]
+# No url allowed in any request uri
+RewriteCond %{QUERY_STRING} path.?=http
+RewriteRule .* - [F,L]
+
+# No resource with an ending '?'
+RewriteCond %{REQUEST_URI} .*\?+$ [OR]
+RewriteCond %{QUERY_STRING} .*\?+$
+RewriteRule .* - [F,L]
+# ==============================================================================
+RewriteCond %{QUERY_STRING} /mobile [OR]
+#RewriteCond %{QUERY_STRING} /palm [OR]
+RewriteCond %{QUERY_STRING} /pda [OR]
+RewriteCond %{QUERY_STRING} /text [OR]
+RewriteCond %{QUERY_STRING} /wap [OR]
+RewriteCond %{QUERY_STRING} /wireless
+#RewriteRule ^(.*)$ http://www.cosat.biz/index.php?%1 [F,L]
+RewriteRule .* - [F,L]
+
+RewriteCond %{REQUEST_URI} /palm/
+#RewriteRule .* - [F,L]
+RewriteRule ^(.*)$ http://www.cosat.biz/index.php?%1 [F,L]
+
+Order Allow,Deny
+# C GOOGLE COCO Deny from 66.249.73.172
+# C GOOGLE COCO Deny from 66.249.73.177
+Deny from 74.50.125.116
+Deny from 77.221.130.17
+
+# The munax.com issue (http://www.webmasterworld.com/search_engine_spiders/3616493.htm)
+deny from 82.99.30.0/30
+deny from 85.58.13.250
+deny from 89.191.65.105
+
+# The seedmain.com issue
+deny from 79.176.0.33
+deny from 79.178.130.218
+deny from 79.180.140.158
+deny from 79.181.116.123
+deny from 79.182.126.224
+
+# The WebDataCentre.com issue
+deny from 66.90.118.101
+
+# Quelques règles qui appartiennent à Cosat
+# Des amis sur un serveur FRANCE kimsuffi - serveur dedier
+# deny from 188.
+# deny from 109. aussi de france ???
+# M'indique la france ??? 178.255.215.72 crawl08.exabot.com
+# deny from 178.
+# Des amis de UKRAINE
+deny from 37.57.25.
+deny from 212.113.48
+deny from 194.247.12
+deny from 194.247.13
+deny from 46.119.124
+deny from 46.118.155.
+deny from 46.118.158.
+# Kazakhstan
+deny from 91.213.93.
+# Des amis de RUSSIE
+deny from 89.189.184.0/21
+deny from 91.210.
+deny from 37.9.53.
+deny from 91.207.60
+deny from 91.207.61
+deny from 37.9.53
+# deny from 176.
+# Des amis de MOLDAVIE j'ai ajouter 100
+deny from 95.100.
+# Des amis de LETTONIE
+deny from 193.105.240.
+# Des amis de CHINE
+#deny from 112.
+#deny from 113.
+#deny from 58.61.164.
+#deny from 124.115.1.
+#deny from 114.
+#deny from 119.
+#deny from 180.76.
+#deny from 183.
+# Des amis de Romania
+deny from 89.33.
+# Des amis du BELARUS
+# Des amis de HONGRIE
+deny from 91.82.196
+deny from 91.82.197
+# deny from 94. // Aussi d'europe
+# Des amis d'afrique Maroc
+deny from 41.
+
+
+#-------------------------------------------------------------------------------
+# Quelques règles qui appartiennent à Cosat
+# RewriteCond %{REMOTE_ADDR} (212\.117\.172\.[0-9][0-9][0-9])
+#-------------------------------------------------------------------------------
+# Des amis sur un serveur FRANCE kimsuffi - serveur dedier
+RewriteCond %{REMOTE_ADDR} ^188.*	[OR] 
+# Des amis de CHINE
+RewriteCond %{REMOTE_ADDR} ^114.* [OR]
+RewriteCond %{REMOTE_ADDR} ^119.* [OR]
+RewriteCond %{REMOTE_ADDR} ^183.* [OR]
+#--- inetnum:        113.64.0.0 - 113.95.255.255
+RewriteCond %{REMOTE_ADDR} ^113.89.* [OR]
+# Brésil
+RewriteCond %{REMOTE_ADDR} ^201.52.* [OR]
+# Argentine
+RewriteCond %{REMOTE_ADDR} ^181.47.* [OR]
+# 182.52.72.0 - 182.52.105.255 Thailande
+# 36.72.96.0 - 36.72.111.255 indonesie
+#  212.92.240.0 - 212.92.255.255 ukraine
+RewriteCond %{REMOTE_ADDR} ^180.76. [OR]
+#RewriteCond %{REMOTE_ADDR} ^222.07[6-9].* [OR]
+# Des amis de RUSSIE
+#--- inetnum: 93.179.68.0 - 93.179.69.255
+RewriteCond %{REMOTE_ADDR} ^93\.179\.(68|69)\.* [or]
+#--- inetnum: 94.190.4.0 - 94.190.60.255
+RewriteCond %{REMOTE_ADDR} ^94\.190\.([4-9]|[1-5][0-9]|60)\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))$ [or]
+RewriteCond %{REMOTE_ADDR} ^94.143.240.* [OR]
+RewriteCond %{REMOTE_ADDR} ^88.198.184.* [OR]
+RewriteCond %{REMOTE_ADDR} ^176.*	[OR]
+RewriteCond %{REMOTE_ADDR} ^177.232.06[0-3].* [OR]
+RewriteCond %{REMOTE_ADDR} 95.108.158.* [or]
+RewriteCond %{REMOTE_ADDR} 124.115.1.* [or]
+RewriteCond %{REMOTE_ADDR} 58.61.164.* [or]
+RewriteCond %{REMOTE_ADDR} ^114\.80\.93\.71$  [or]
+RewriteCond %{REMOTE_ADDR} ^69\.84\.207\.[0-9][0-9][0-9]$  [or]
+RewriteCond %{REMOTE_ADDR} ^119\.147\.6\.60$ [or]
+RewriteCond %{REMOTE_ADDR} ^119\.147\.75\.137$ [or]
+RewriteCond %{REMOTE_ADDR} ^119\.147\.75\.140$
+RewriteRule ^.*$ http://img.over-blog.com/600x400/1/09/40/74/SSBBW-003/gros-cul-de-BBW-001.jpg[R,L]
+
+#SetEnvIfNoCase Referer ".*(block-this-referrer|and-this-referrer|and-this-referrer).*" BlockedReferer
+
+# ------------------------------------------------------------------------------
+# And URLs, as paramter.
+# ------------------------------------------------------------------------------
+#********************************************
+# ***** COSAT - Modif pour mon site
+#********************************************
+RewriteCond %{REQUEST_URI} !=http:\/\/(www\.)?cosat\.biz
+RewriteCond %{REQUEST_URI} !=http:\/\/(www\.)?cosat\.biz\/hermes\/
+RewriteCond %{REQUEST_URI} =http
+RewriteRule .* - [F,L]
+#********************************************
+# COSAT - Modifier pour mon site
+#********************************************
+RewriteCond %{QUERY_STRING} !(&[\w]+=http://www\.cosat\.biz/) [NC]
+RewriteCond %{QUERY_STRING} !(&[\w]+=http://www\.cosat\.biz/hermes/) [NC]
+RewriteCond %{QUERY_STRING} (&[\w]+=(http://[^%]+/)) [NC]
+RewriteRule .* - [F,L]
+#********************************************
+# ***** COSAT - Site qui me cause un probleme
+#********************************************
+RewriteCond %{HTTP_REFERER} pics4us\.org [NC]
+RewriteCond %{HTTP_REFERER} bellespics\.eu [NC]
+RewriteCond %{HTTP_REFERER} pppics\.com [NC]
+RewriteCond %{HTTP_REFERER} pixfr\.eu [NC]
+RewriteCond %{HTTP_REFERER} frpix\.eu [NC]
+RewriteCond %{HTTP_REFERER} picsfr\.eu [NC]
+RewriteCond %{HTTP_REFERER} fotofr\.eu [NC]
+RewriteCond %{HTTP_REFERER} frfoto\.eu [NC]
+RewriteCond %{HTTP_REFERER} ^.*foto.*\.eu [NC]
+# RewriteCond %{HTTP_REFERER} picornot\.com [NC]
+RewriteRule ^.*$ http://img.over-blog.com/600x400/1/09/40/74/SSBBW-003/gros-cul-de-BBW-001.jpg[R,L]
+
+RewriteCond %{HTTP_REFERER} ^.*picornot\.com [NC]
+RewriteCond %{HTTP_REFERER} picornot\.com [NC]
+RewriteCond %{REQUEST_URI} !^/photoget_web.php%3FNo [NC]
+RewriteRule ^.*$ http://img.over-blog.com/600x400/1/09/40/74/SSBBW-003/gros-cul-de-BBW-001.jpg[R,L]
+
+#RewriteCond %{REQUEST_URI} photoget_web.php%3FNo%3D4(.*) [NC]
+#RewriteRule ^(.*)$ - [L]
+
+#php_value auto_prepend_file global_prepend.php
+#php_value auto_append_file global_append.php
+ 
+#################################################################################
+# Redirect China spammer registration
+# China 27.*
+# 27.148.0.0 - 27.151.255.255
+#
+#	Deny from 27.148.0.0/255.252.0.0
+#
+# ou
+#
+#	Deny from 27.148.0.0/14
+#
+# Explication: Une adresse IP est un nombre sur 32 bits. La notation a.b.c.d le décompose en quatre octets. Donc 27.148.0.0 
+# donne en binaire:
+# 00011011 10010100 00000000 00000000
+#
+# Et 27.151.255.255:
+#
+# 00011011 10010111 11111111 11111111
+#
+# Le masque, c'est un nombre de 32 bits avec que des 1 puis que des 0 (i.e. pas un mélange), tel que les bits correspondants 
+# aux "1" du masque ne changent pas pour toutes les adresses #concernées. Donc le masque ici est:
+#
+# 11111111 11111100 00000000 00000000
+#
+# Soit 255.252.0.0 (ce qui donne la première notation).
+#
+# La deuxième notation, plus pratique à manipuler, consiste à compter le nombre de "1" (on appelle ça le "prefix-length", 
+# longeur de préfixe). Il y a 14 bits à 1 ici, d'où la deuxième #notation.
+#################################################################################
+# Ukraine L'viv Kyivstar Pjsc
+# AS15895 KSNET-AS, UA (registered Oct 30, 2000)
+# 134.249.0.0 - 134.249.63.255
+# Deny from 
+
+# China Fuqing Chinanet Fujian Province Network
+# AS4134 CHINANET-BACKBONE No.31,Jin-rong Street, CN (registered Aug 01, 2002)
+# 110.80.0.0 - 110.87.255.255
+Deny from 110.80.0.0/13
+# China Hangzhou Aliyun Computing Co. Ltd
+# AS37963 CNNIC-ALIBABA-CN-NET-AP Hangzhou Alibaba Advertising Co.,Ltd., CN (registered Mar 08, 2006)
+# 119.23.0.0 - 119.23.255.255
+Deny from 119.23.0.0/16
+# China Deyang Chinanet Sichuan Province Network
+# AS38283 CHINANET-SCIDC-AS-AP CHINANET SiChuan Telecom Internet Data Center, CN (registered Nov 14, 2006)
+# 125.64.0.0 - 125.71.255.255
+Deny from 125.64.0.0/13
+# China Beijing Tencent Cloud Computing (beijing) Co. Ltd
+# AS45090 CNNIC-TENCENT-NET-AP Shenzhen Tencent Computer Systems Company Limited, CN (registered Feb 01, 2008)
+# 118.24.0.0 - 118.25.255.255
+Deny from 118.24.0.0/15
+# China Hangzhou Aliyun Computing Co. Ltd
+# AS37963 CNNIC-ALIBABA-CN-NET-AP Hangzhou Alibaba Advertising Co.,Ltd., CN (registered Mar 08, 2006)
+# 120.76.0.0 - 120.79.255.255
+Deny from 120.76.0.0/14
+# China Hangzhou Aliyun Computing Co. Ltd
+# AS37963 CNNIC-ALIBABA-CN-NET-AP Hangzhou Alibaba Advertising Co.,Ltd., CN (registered Mar 08, 2006)
+# 47.96.0.0 - 47.97.255.255
+Deny from 47.96.0.0/12
+# Kyrgyzstan Bishkek Transfer Ltd
+# AS25035 TRANSFER-AS, KG (registered Jul 04, 2002)
+# 81.88.192.0 - 81.88.207.255
+Deny from 81.88.192.0/20
+# Ukraine Kharkiv Kyivski Telekomunikatsiyni Merezhi Llc
+# AS25229 VOLIA-AS, UA (registered Sep 06, 2002)
+# 77.122.0.0 - 77.122.127.255
+Deny from 77.122.0.0/16
+# Ukraine L'viv Kyivstar Pjsc
+# AS15895 KSNET-AS, UA (registered Oct 30, 2000)
+# 134.249.128.0 - 134.249.255.255
+Deny from 134.249.128.0/17 
+# Ukraine L'viv Kyivstar Pjsc
+# AS15895 KSNET-AS, UA (registered Oct 30, 2000)
+# 178.137.64.0 - 178.137.127.255
+Deny from 178.137.64.0/18
+# Ukraine L'viv Kyivstar Pjsc
+# AS15895 KSNET-AS, UA (registered Oct 30, 2000)
+# 46.119.122.0 - 46.119.122.255
+Deny from 46.119.122.0/24
+# Ukraine L'viv Kyivstar Pjsc
+# AS15895 KSNET-AS, UA (registered Oct 30, 2000)
+# 46.118.155.0 - 46.118.155.255
+Deny from 46.118.155.0/24
+# Ukraine L'viv Kyivstar Pjsc
+# AS15895 KSNET-AS, UA (registered Oct 30, 2000)
+# 46.119.127.0 - 46.119.127.255
+Deny from 46.119.127.0/24
+# Russian Federation Zavolzh'ye Pppoe Clients Terminations In
+# AS12389 ROSTELECOM-AS, RU (registered Jul 01, 2005)
+#  95.37.0.0 - 95.37.127.255
+Deny from 62.109.16.0/16
+# Russian Federation Moscow Jsc Ispsystem 
+# AS29182 ISPSYSTEM-AS, LU (registered Jun 23, 2003)
+# 62.109.16.0 - 62.109.23.255
+Deny from 62.109.16.0/21
+# Russian Federation Moscow Jsc Ispsystem 
+# AS29182 ISPSYSTEM-AS, LU (registered Jun 23, 2003)
+# 94.250.254.0 - 94.250.255.255
+Deny from 94.250.254.0/23
+# Chinanet various China Fuqing Chinanet Fujian Province Network 
+Deny from 27.148.0.0/14
+# Redirect Russian Federation Marks Barbarich Viacheslav Yuryevich  
+# ASN Russian Federation AS60117 HS, AE (registered May 13, 2014)  
+# 5.188.203.0 - 5.188.203.255
+Deny from 5.188.203.0/24
+# Redirect  Russian Federation Saint Petersburg Ooo Network Of Data-centers Selectel 
+# 95.213.228.0 - 95.213.228.255
+Deny from 95.213.228.0/24
+# Redirect Russian Federation Podol'sk Net By Net Holding Llc 
+# Net By Net Holding LLC
+# 109.63.192.0 - 109.63.255.255
+Deny from 109.63.192.0/18
+# Redirect Russian Federation Podol'sk Ncnet Broadband Customers 
+# National Cable Networks
+# 178.140.0.0 - 178.140.127.255
+Deny from 178.140.0.0/16
+# Redirect Russian Federation Penza Cjsc Er-telecom Holding 
+# 37.113.40.0 - 37.113.47.255
+# Redirect CJSC "ER-Telecom Holding" Penza branch
+Deny from 37.113.40.0/21
+# Redirect Hangzhou Alibaba Advertising Co.,Ltd.
+# 120.24.0.0 - 120.27.255.255
+# Redirect China Hangzhou Aliyun Computing Co. Ltd 
+Deny from 120.24.0.0/14
+# Redirect Viet Nam Haiphong Adsl Service 
+# 113.165.0.0 - 113.165.127.255
+Deny from 113.165.0.0/16
+# Redirect Romania Bucharest Voxility Srl 
+# 93.115.80.0 - 93.115.87.255 
+Deny from 93.115.80.0/20
+# Redirect ONLINE PROVEDOR DE ACESSO A INTERNET LTDA 
+# 191.7.192.0 - 191.7.255.255 ???
+# Redirect Brazil Varjota Online Provedor De Acesso A Internet Ltda 
+Deny from 191.7.192.0/30
+# Redirect ONLINE PROVEDOR DE ACESSO A INTERNET LTDA 
+# 187.40. - 187.40.255.255 ???
+# Redirect Brazil Rio De Janeiro Telemar Norte Leste S.a. 
+Deny from 187.40.0.0/14
+# Redirect Russie spammer registration
+# 82.146.32.0 - 82.146.39.255
+# Redirect Russian Federation Irkutsk Cloud Dc Network 
+Deny from 82.146.32.0/19
+# Redirect  Russian Federation Moscow Broadband Connections
+# 95.179.112.0 - 95.179.119.255
+Deny from 95.179.112.0/20
+# Redirect Latvia Riga Jsc Balticom 
+# 109.73.111.0 - 109.73.111.255
+Deny from 109.73.111.0/24
+# Redirect  Ukraine Mariupol' Maxnet Telecom Ltd
+# 31.202.192.0 - 31.202.255.255
+Deny from 31.202.192.0/18
+# Redirect Ukraine Makiyivka Online Technologies Ltd 
+# netname: ONLINETECH-ISG-VPDN       
+#  151.0.0.0 - 151.0.31.255
+Deny from 151.0.0.0/19
+# Redirect China China Nanjing Chinanet Jiangsu Province Network  
+# ASN China AS4134 CHINANET-BACKBONE No.31,Jin-rong Street, CN (registered Aug 01, 2002)  
+# 180.96.0.0 - 180.127.255.255
+Deny from 180.96.0.0/11
+# Redirect China China Xiamen Chinanet Fujian Province Network  
+# ASN China AS4134 CHINANET-BACKBONE No.31,Jin-rong Street, CN (registered Aug 01, 2002) 
+# 120.40.0.0 - 120.43.255.255
+Deny from 120.40.0.0/14
+# Redirect China Hangzhou Aliyun Computing Co. Ltd  
+# AS37963 CNNIC-ALIBABA-CN-NET-AP Hangzhou Alibaba Advertising Co.,Ltd., CN 
+# 47.92.0.0 - 47.95.255.255
+#Deny from 120.40.0.0/14
+# Redirect China Hangzhou Aliyun Computing Co. Ltd  
+# AS37963 CNNIC-ALIBABA-CN-NET-AP Hangzhou Alibaba Advertising Co.,Ltd., CN 
+# 39.96.0.0 - 39.108.255.255
+#Deny from 120.40.0.0/14
+###############################################################################
+# Redirect China spammer registration
+#
+# China 58.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^58\.(1[6-9]|2[0-3])\. [or]
+# Oriental Cable 
+RewriteCond %{REMOTE_ADDR} ^58\.(2[4-5])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^58\.(3[2-9]|[4-5][0-9]|6[0-3])\. [or]
+# Beijing Education Information Network
+RewriteCond %{REMOTE_ADDR} ^58\.(1(1[6-9]))\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^58\.(1(9[2-9])|2(0[0-7]))\. [or]
+# Chinanet Jiangsu Province
+RewriteCond %{REMOTE_ADDR} ^58\.(2(0[8-9]|1[0-9]|2[0-3]))\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^58\.(2(4[0-9]|5[0-5]))\. [or]
+#
+# China 59.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^59\.(3[2-9]|[4-5][0-9]|6[0-3])\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^59\.(6[4-9]|7[0-9])\. [or]
+# Chinanet Hubei Province
+RewriteCond %{REMOTE_ADDR} ^59\.(1(7[2-5]))\. [or]
+# China eGovNet Information Center
+RewriteCond %{REMOTE_ADDR} ^59\.(1(9[2-9])|2([0-4][0-9]|5[0-5]))\. [or]
+#
+# China 60.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^60\.([0-9]|[1-2][0-9]|3[0-1])\. [or]
+# MBIP
+RewriteCond %{REMOTE_ADDR} ^60\.55\. [or]
+# Oriental Cable
+RewriteCond %{REMOTE_ADDR} ^60\.63\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^60\.(1([6-8][0-9]|9[0-1]))\. [or]
+# Beijing Telecom
+RewriteCond %{REMOTE_ADDR} ^60\.(1(9[4-5]))\. [or]
+# China various
+RewriteCond %{REMOTE_ADDR} ^60\.(2([0-1][0-9]|2[0-3]))\. [or]
+# Chinanet Shandong Province
+RewriteCond %{REMOTE_ADDR} ^60\.235\. [or]
+# China Digital Kingdom
+RewriteCond %{REMOTE_ADDR} ^60\.247\. [or]
+# China Daqing Technology Network
+RewriteCond %{REMOTE_ADDR} ^60\.252\. [or]
+# China NIC
+RewriteCond %{REMOTE_ADDR} ^60\.253\. [or]
+#
+# China 61.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^61\.(4[8-9]|5[0-5])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^61\.(1([3-8][0-9]|9[0-1]))\. [or]
+# China United Telecommunications Corporation
+RewriteCond %{REMOTE_ADDR} ^61\.(2(4[0-3]))\. [or]
+#
+# China 117.*
+#
+# Chinanet Tianjin Province
+RewriteCond %{REMOTE_ADDR} ^117\.([8-9]|1[0-5])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^117\.(2[1-9]|3[0-9]|4[0-5])\. [or]
+# Cenotone Holding
+RewriteCond %{REMOTE_ADDR} ^117\.(4[8-9]|5[0-1])\. [or]
+# Various
+RewriteCond %{REMOTE_ADDR} ^117\.(59|6[0-9]|7[0-3])\. [or]
+# BeiJing Kuandaitong Telecom Technology
+RewriteCond %{REMOTE_ADDR} ^117\.(1(0[0-1]))\. [or]
+# Beijing Education Information Network
+RewriteCond %{REMOTE_ADDR} ^117\.(1(0[6-7]))\. [or]
+# Beijing Education Information Network
+RewriteCond %{REMOTE_ADDR} ^117\.(1(1[2-9]))\. [or]
+# China Cable Television Network, China Mobile Communications Corporation
+RewriteCond %{REMOTE_ADDR} ^117\.(1(2[4-9]|[3-8][0-9]|9[0-1]))\. [or]
+#
+# China 123.*
+#
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.([4-9]|1[0-5])\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.(5[2-5])\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.(5[2-9]|[6-8][0-9]|9[0-7])\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.101\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.(1(1[2-9]|2[0-9]|3[0-5]))\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.(1(4[4-9]|[5-6][0-9]|7[0-5]))\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.(1(7[7-9]|8[0-9]|9[0-1]))\. [or]
+# Chinanet various 
+RewriteCond %{REMOTE_ADDR} ^123\.(2(3[2-5]))\. [or]
+#
+# China 124.*
+#
+# Chinanet Xizang Province
+RewriteCond %{REMOTE_ADDR} ^124\.31\. [or]
+# Chinanet Beijing, Hainan province
+RewriteCond %{REMOTE_ADDR} ^124\.(64|65|66)\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^124\.(7[2-9])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^124\.(89|9[0-5])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^124\.(1(1[2-9]))\. [or]
+# Chinanet Shendong Province
+RewriteCond %{REMOTE_ADDR} ^124\.(1(2[8-9]|3[0-9]))\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^124\.(1(6[0-7]))\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^124\.(2(2[6-9]|3[0-9]))\. [or]
+#
+# China 125.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^125\.(6[4-9]|7[0-1])\. [or]
+# Chiannet Zhejiang Province
+RewriteCond %{REMOTE_ADDR} ^125\.(1(0[4-9]|1[0-9]|2[0-7]))\. [or]
+# Chinanet Heilongjiang Province
+RewriteCond %{REMOTE_ADDR} ^125\.211\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^125\.(2(1[6-9]|2[0-3]))\. [or]
+#
+# China 202.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^202\.(9[6-9]|1([0-1][0-9]|2[0-1]))\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^202\.(1(9[2-9])|2(0[0-7]))\. [or]
+#
+# China 210.*
+#
+# Chinanet Jitong Province 
+RewriteCond %{REMOTE_ADDR} ^210\.(1[2-3])\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^210\.(2[5-9]|3[0-9]|4[0-7])\. [or]
+# Chinanet IP network
+RewriteCond %{REMOTE_ADDR} ^210\.(5[1-2])\. [or]
+# China Internet Network Information Center
+RewriteCond %{REMOTE_ADDR} ^210\.(7[2-8])\. [or]
+# Chinanet IP network
+RewriteCond %{REMOTE_ADDR} ^210\.(8[2-3])\. [or]
+#
+# China 211.*
+#
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^211\.(6[4-9]|7[0-1])\. [or]
+# China Education and Research Network, various
+RewriteCond %{REMOTE_ADDR} ^211\.([8-9][0-9]|1(0[0-3]))\. [or]
+# China Mobile Communications Corporation, China Network Information Center
+RewriteCond %{REMOTE_ADDR} ^211\.(1(3[6-9]|[4-5][0-9]|6[0-7]))\. [or]
+#
+# China 218.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^218\.([0-9]|[1-2][0-9]|3[0-1])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^218\.(5[6-9]|[6-9][0-9])\. [or]
+# Chinanet IP network
+RewriteCond %{REMOTE_ADDR} ^218\.(1(0[4-9]))\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^218\.(1(9[3-9])|2(0[0-7]))\. [or]
+# China Network Information Center
+RewriteCond %{REMOTE_ADDR} ^218\.(2(4[0-7]))\. [or]
+#
+# China 219.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^219\.(1(2[8-9]|[3-5][0-9]))\. [or]
+# China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^219\.(2(1[6-9]|2[0-9]|3[0-5]))\. [or]
+# China Education and Research Network 
+RewriteCond %{REMOTE_ADDR} ^219\.(2(4[2-7]))\. [or]
+#
+# China 220.*
+#
+# CETC Chinacomm
+RewriteCond %{REMOTE_ADDR} ^220\.154\. [or]
+# Chinanet various, China United Telecommunications Corporation
+RewriteCond %{REMOTE_ADDR} ^220\.(1([6-9][0-9])|2(0[0-7]))\. [or]
+# Oriental Cable
+RewriteCond %{REMOTE_ADDR} ^220.\234\. [or]
+# eTrunk Network Telecomunication
+RewriteCond %{REMOTE_ADDR} ^220\.(2(4[2-3]))\. [or]
+# Chinanet IP network
+RewriteCond %{REMOTE_ADDR} ^220\.(2(4[8-9]|5[0-2]))\. [or]
+#
+# China 221.*
+#
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^221\.([0-9]|1[0-2])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^221\.(1[3-5])\. [or]
+# Oriental Cable
+RewriteCond %{REMOTE_ADDR} ^221\.137\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^221\.((1(9[2-8]))\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))|199\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2(0[0-7]))\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5])))$ [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^221\.(199\.(2(2[4-9]|[3-4][0-9]|5[0-5]))\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))|(2([0-3][0-9]))\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5]))\.([0-9]|[1-9][0-9]|1([0-9][0-9])|2([0-4][0-9]|5[0-5])))$ [or]
+#
+# China 222.*
+#
+# Chinanet various, China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^222\.([0-9]|[1-8][0-9]|9[0-5])\. [or]
+# Chinanet various
+RewriteCond %{REMOTE_ADDR} ^222\.(1(2[8-9]|3[0-9]|4[0-3]))\. [or]
+# Chinanet Jilin Province 
+RewriteCond %{REMOTE_ADDR} ^222\.(1(6[0-3]))\. [or]
+# Chinanet various, China Education and Research Network
+RewriteCond %{REMOTE_ADDR} ^222\.(1(6[8-9]|[7-9][0-9])|2([0-1][0-9]|2[0-3]))\. [or]
+# Chinanet Hunan Province, Beijing Education Information Network, Shenzhen Topway Video Communication
+RewriteCond %{REMOTE_ADDR} ^222\.(2(4[0-9]))\.
+#
+RewriteRule ^.*$ http://img.over-blog.com/600x400/1/09/40/74/SSBBW-003/gros-cul-de-BBW-001.jpg[R,L]
+
+allow from all

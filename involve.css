@@ -1,0 +1,383 @@
+
+/* Programme : involvement.css
+ * Description : style sheet for the involment page.
+*  Auteur : Denis Léveillé 	 			  Date : 2017-12-15
+*/
+
+
+
+.calendar-content-wrap {
+	min-width: 310px; 
+}
+
+.calendar-content-wrap ul {
+	border: 1px solid #000; 
+}
+
+.calendar-content-wrap li {
+	border-left: 1px solid #fff; 
+}
+
+
+.involve_intro_text p {
+		border:0;
+		text-align: justify;
+		font-family: 'Lato', Helvetica, sans-serif !important;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 25px;
+		margin:0 0 10px;
+		outline: 0;
+		padding: 0;
+		vertical-align:baseline;
+}
+
+.days {
+	height : 75px;
+    	margin: 0;
+    	padding: 4px;	
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #36752D), color-stop(1, #275420) );
+	background:-moz-linear-gradient( center top, #36752D 5%, #275420 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#36752D', endColorstr='#275420');
+	background-color:#36752D; 
+	font-size: 14px;
+	font-weight: bold; 
+	vertical-align: middle;
+	box-sizing: border-box;
+	list-style-type: none;
+}
+
+.days li {
+    	display: inline-block;
+    	width: 16%;
+	height : 100%;
+	font-size: 15px; 
+    	color:#FFF; 
+    	text-align: center;
+	vertical-align: middle;
+	
+    
+}
+
+.hours_block {
+   	padding: 8px 0;
+    	background: #eee;
+    	margin: 0;
+	font-size: 14px;
+	font-weight: bold; 
+    	box-sizing: border-box;
+    	list-style-type: none;
+	
+}
+
+.hours_block ul {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.hours_block li {
+	list-style-type: none;
+	display: inline-block;
+	width: 16%;
+	height : 100%;
+	text-align: center;
+	
+	font-size:12px;
+	color: #777;
+    
+}
+
+
+.hours_block li .active {
+	padding: 5px;
+	background: #0e8a29;
+	color: white !important;
+}
+
+
+
+.hours_block  a{
+	color: #75d316 !important; /*#0e8a29;*/
+}
+
+.hours_block a:hover,
+.hours_block a:focus{
+	color: #008000 !important; /*#0e8a29;*/
+}
+.hours_block a:visited{
+	color: #75d316;
+}
+.hours_block a:active{
+	color: #000;
+}
+
+.hours_block .blk_proc{
+	color: #C0C0C0;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.hours_block .blk_hour{
+	font-size: 14px;
+	font-weight: bold;
+	/*border-right: 1px solid #000; */
+}
+
+.hours_block .in_process { 
+	background: #008000;
+	color : #fff !important;
+}
+
+.hours_block .assign {
+	text-align : left;
+	font-size: 1.05em;
+}
+
+.hours_block .countdown { 
+	font-family: 'Playfair Display'; /*font-effect-shadow-multiple*/
+	/*color : #FFFF00 !important;*/
+	background: black url("../img/decompte.jpg") no-repeat center;
+	background-size : contain;
+}
+
+
+.line_grey {
+	background: #DFFFDE; 
+	color: #275420;
+	
+}
+
+
+.large{
+	padding-left : 6px;
+ 	width: 240px !important;
+ 	text-align: left !important;
+}
+
+.bkgrey{
+    text-align: center !important;
+    background-color: #006056 !important;
+    font-family: 'Libre Baskerville';
+    font-size: 1.0em;
+    color: #FFFFFF !important;
+   /* font-weight: bold; */
+}
+
+hr {
+	width : 99%;
+	border: 1px currentColor; 
+	border-image: none; 
+	height: 5px; 
+	/*margin-bottom: 1.5em; */
+	background-color: white;
+}
+
+
+@media only screen and (max-width:799px) and (min-width:500px)
+{
+    	.days li {
+    		font-size: 12px; 
+	}
+
+}
+
+@media only screen and (max-width:499px) and (min-width:300px)
+{
+	.involve_intro_text p {
+		font-size: 12px;
+		line-height: 14px;
+	}
+	.days {
+		height : 60px;
+	}
+	.days ul {
+		/*height : 50px;*/
+		/*font-size: 14px; */
+	    	
+	}
+    	.days li {
+	    	width: 15%;
+    		font-size: 10px; 
+		padding: 2px;
+		line-height:1.1;
+		height : 100%;
+		/*font-weight: normal;*/
+	}
+
+ 	.hours_block:first-child li {
+    		font-size:14px;
+	       	font-weight: bold;
+    	}   	
+ 	.hours_block li {
+	    	width: 15%;
+    		font-size: 10px; 
+		padding: 2px;
+		line-height:1.1;
+		height : 100%;
+    	}   	
+	.hours_block li .active {padding: 2px;}
+	
+	.hours_block .blk_proc{
+		font-size: 10px;
+		font-weight: bold;
+	}
+
+	.hours_block li a {
+		font-size: 12px; 
+	}
+	
+	.hours_block .assign {
+		text-align : left;
+		font-size: 11px;
+		overflow: hidden;
+	}
+	.hours_block .blk_hour{
+		font-size: 12px;
+		font-weight: bold;
+		/*border-right: 1px solid #000; */
+	}
+	.bkgrey{
+	    	text-align: center !important;
+	    	background-color: #006056 !important;
+	    	font-family: 'Libre Baskerville';
+	    	font-size: 0.6em !important;
+		font-weight: normal;
+	    	color: #FFFFFF !important;
+	   /* font-weight: bold; */
+	}
+	
+	hr {
+		height:3px; 
+	}
+	
+}
+
+@media screen and (max-width: 450px) {
+    /*.days li, 
+    .hours_block li {width: 12.5%;}*/
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    /*.days li, 
+    .hours_block li {width: 13.1%;}*/
+}
+
+
+@media screen and (max-width: 290px) {
+    /*.days li, 
+    .hours_block li {width: 12.2%;}*/
+}
+
+.barre	{
+	position: relative;
+	left: 0px;
+	float: none;
+	clear: none;
+	width: 98%; /*width: 968px;*/
+	height: auto;
+	margin: 0 auto; /* 50px auto;*/
+	border-radius: 5px;
+	 -moz-border-radius: 5px;
+	 -webkit-border-radius: 5px;
+	color: white;
+	font-size: 14pt;
+	font-weight: bold;
+	font-style: normal;
+	text-align: center;
+	background-color: #000FFF;
+	overflow: hidden;	/* safari and opera need this */
+	z-index: 1;
+	display: block;
+}
+
+
+.barre_bas	{
+	position: relative;
+	left: 0px;
+	float: none;
+	clear: none;
+	width: 98%; /*width: 968px;*/
+	height: auto;
+	margin: 0 auto;
+	border-radius: 5px;
+	 -moz-border-radius: 5px;
+	 -webkit-border-radius: 5px;
+	color: white;
+	font-size: 14pt;
+	font-weight: bold;
+	font-style: normal;
+	text-align: center;
+	background-color: #000FFF;
+	overflow: hidden;	/* safari and opera need this */
+	z-index: 1;
+	display: block;
+}
+
+/*@media (max-width: 320px){
+	.barre,	.barre_bas	{
+		width: 300px;
+	}
+}
+
+@media (max-width: 480px) {
+	.barre,	.barre_bas	{
+		width: 98%;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+	.barre,	.barre_bas	{
+		width: 750px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+	.barre,	.barre_bas	{
+		width: 1000px;
+	}
+}*/
+
+
+.bck_lturq{
+	font-variant : small-caps;
+	background-color: #0dc4c4 !important; 
+}
+
+.day-date-time {
+	/*font-size: 24px !important;
+	font-weight: 800;*/
+	text-align:center;
+}
+
+.inputvoid { 
+	font-style:italic; 
+	font-weight:normal; 
+	background-color: #CCCCCC;
+	vertical-align: middle;
+	padding: 1px;
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+*::-webkit-input-placeholder{color:#000!important;font-style:italic; }
+*:-moz-placeholder{color:#000!important;font-style:italic; }
+*::-moz-placeholder{color:#000!important;font-style:italic; }
+*:-ms-input-placeholder{color:#FFF!important;font-style:italic; }
+
+.involve-form input[readonly], input[readonly="readonly"] {
+	background-color: #C0C0C0;
+	color : white;
+	font-weight: bold;
+}
+
+.involve-form select[readonly], select[readonly="readonly"] {
+	background-color: #C0C0C0;
+	color : white;
+	font-weight: bold;
+}

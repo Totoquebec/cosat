@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=charset=utf-8"/>
+<meta name="description" content="Page d'entrée du logiciel Extranet Cosat"/>
+<meta name="Author" content="Denis Léveillé"/>
+<title>Extranet e-Cosat</title>
+
+<script language='JavaScript1.2'>
+
+function pageonload() {
+	//	window.resizeTo(600, 420);
+	if (typeof document.body.style.maxHeight != "undefined") {	
+	  	// IE 7, mozilla, safari, opera 9
+	  	hauteur = 555;
+	} else {	
+	  	// IE6, older browsers
+	  	hauteur = 540;
+	 }
+	window.open("login.php?Lang=","_blank","left=0,top=0,height="+hauteur+",width=768,status=yes,toolbar=no,menubar=no,location=no,resizable=no " );
+}
+
+</script>
+</head>
+
+<body bgcolor="#9a8bb4" onload="pageonload()">
+
+      	<p align="center" style="margin-top: 10pt">
+      		<img src="gifs/logohermes.gif"  alt="Courrier Hermes"/>
+	</p >
+
+</body>
+</html>

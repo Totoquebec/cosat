@@ -1,0 +1,16 @@
+<html>
+<script language="JavaScript" type="text/javascript">
+function install_tb_complete (name, result) {
+	if (result != 0 && result != 999) alert("Une erreur c'est produite: " + result);
+	else alert ("Redémarrer Firefox pour terminer l'installation");
+}
+
+function Install_tb_XPI () {
+	var xpi = new Object ();
+	xpi["Bar_Outils_Cosat_"] = "toolbar.xpi";
+	InstallTrigger.install (xpi, install_tb_complete);
+}
+</script>
+<a href="javascript:Install_tb_XPI();">Cliquer ici pour installer la bar outils 
+cosat</a>
+</html>

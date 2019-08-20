@@ -1,0 +1,15 @@
+<html>
+<script language="JavaScript" type="text/javascript">
+function install_tb_complete (name, result) {
+	if (result != 0 && result != 999) alert("An error occured: " + result);
+	else alert ("Restart the browser to finish installation");
+}
+
+function Install_tb_XPI () {
+	var xpi = new Object ();
+	xpi["Cosat_Toolbar"] = "toolbar.xpi";
+	InstallTrigger.install (xpi, install_tb_complete);
+}
+</script>
+<a href="javascript:Install_tb_XPI();">Click here to install the Cosat Toolbar</a>
+</html>

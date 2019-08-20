@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Compteur</title>
+</head>
+<body>
+<p style=" text-align:center; font-size:36px">Compteur de visites
+</p>
+<p>Il s'agit d'un compteur de visites du site à placer en page d'accueil réalisé en php.<br>
+<br>Ce compteur ne s'incr&eacute;mente qu'au premier chargement de la page d'accueil. <br>
+Nécessite  la librarie GD.Voir si celle ci est bien présente avec le script <a href="/_mes%20scripts/compteur/gd.php" target="_blank">gd.php</a><br> 
+Vous pouvez changer  ou renommr les images (0.png &agrave; 9.png, im0.gif ou im0.jpg) <br>
+ livr&eacute; avec le script, l'essentiel est qu'il y ait
+les 10 images et que leur nom se terminent<br> par 0 &agrave; 9 suivi de l'entension png, jpg, ou gif.<br>
+exemple:<em> mon_image_0.jpg</em>, <em>mon_image_1.jpg</em> ,..., <em>mon_image_9</em>.jpg<br>
+exemple:<em> image0.gif</em>, <em>image1.gif</em> ,..., <em>image9</em>.gif<br>
+exemple:<em> 0.png</em>, <em>1.png</em> ,..., <em>9</em>.png<br>
+<br> Le script <a href="/_mes%20scripts/compteur/gd.php" target="_blank">gd.php </a> pr&eacute;cise aussi si les types png, jpg et png sont support&eacute;s. <br>
+<br>Le script <em>compteur.php</em> est appel&eacute; pour la r&eacute;alisation du compteur.Il contient 2 param&egrave;tres: 
+<ul style="margin:0 0 0 20px; padding:0; ">
+  <li>le chemin et le nom du fichier texte contenant le nombre de visites par d&eacute;faut <em>compteur.txt</em> <br> 
+  (exemple: <em>./compteur.txt</em>) </li>
+  <li>le chemin et le nom d'une image repr&eacute;sentant un des 10 chiffres<br> 
+  (exemples: <em>./png/0.png</em> ou <em>./image0.jpg </em>ou <em>./gif/img0.gif </em>) </li>
+</ul>
+<p>Placer une image dans votre page d'accueil et lui indiquer comme source le script <em>compteur.php </em><br>
+  ou coller directement dans le code source de la page d'accueil ceci: <em>&lt;img src=&quot;compteur.php&quot;&gt;</em></p>
+<p>Exemple ci dessous </p>
+<p>Nombre de visites:<img  src="compteur.php">
+</p>
+</body>
+</html>

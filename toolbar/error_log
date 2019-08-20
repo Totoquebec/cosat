@@ -1,0 +1,11 @@
+[05-Jun-2008 10:25:20] PHP Parse error:  syntax error, unexpected '<' in /home/cosatbi/public_html/toolbar/tool.php on line 21
+[05-Jun-2008 12:16:27] PHP Parse error:  syntax error, unexpected T_STRING in /home/cosatbi/public_html/toolbar/after_install.php on line 6
+[05-Jun-2008 12:18:17] PHP Parse error:  syntax error, unexpected T_STRING in /home/cosatbi/public_html/toolbar/after_install.php on line 6
+[05-Jun-2008 14:48:19] PHP Parse error:  syntax error, unexpected T_IF, expecting ',' or ';' in /home/cosatbi/public_html/toolbar/index.php on line 50
+[05-Jun-2008 14:48:20] PHP Parse error:  syntax error, unexpected T_IF, expecting ',' or ';' in /home/cosatbi/public_html/toolbar/index.php on line 50
+[05-Jun-2008 14:54:57] PHP Parse error:  syntax error, unexpected T_ECHO in /home/cosatbi/public_html/toolbar/index.php on line 48
+[05-Jun-2008 14:54:58] PHP Parse error:  syntax error, unexpected T_ECHO in /home/cosatbi/public_html/toolbar/index.php on line 48
+[05-Jun-2008 14:54:59] PHP Parse error:  syntax error, unexpected T_ECHO in /home/cosatbi/public_html/toolbar/index.php on line 48
+[05-Jun-2008 14:54:59] PHP Parse error:  syntax error, unexpected T_ECHO in /home/cosatbi/public_html/toolbar/index.php on line 48
+[05-Jun-2008 14:54:59] PHP Parse error:  syntax error, unexpected T_ECHO in /home/cosatbi/public_html/toolbar/index.php on line 48
+[05-Jun-2008 14:54:59] PHP Parse error:  syntax error, unexpected T_ECHO in /home/cosatbi/public_html/toolbar/index.php on line 48

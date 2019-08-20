@@ -1,0 +1,737 @@
+# ==============================================================================
+# .htaccess file for  http://localhost/www.html4.com
+# Web accessibility for disabled or impaired people,
+# web sites usability for everyone,
+# and markup languages standards.
+# ------------------------------------------------------------------------------
+# Feel free to copy and distribute this file, but keep in mind that you'll have
+# to make some modifications to have it running on your own system.
+# I advise you to look for the string "html4", to understand any of the commands
+# in which it appears, and to adapt them to your needs.
+# This .htaccess file is updated nearly dayly.
+# ------------------------------------------------------------------------------
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
+# ------------------------------------------------------------------------------
+# Using this file improperly can make your site unreachable.
+# If you see a "500 Internal Server Error" message, just remove your
+# .htaccess file and edit it.
+# ------------------------------------------------------------------------------
+# Questions? Comments? contact[at]html4.com
+# ==============================================================================
+# Compulsory: tells Apache it will have to rewrite some requests.
+#-------------------------------------------------------------------------------
+# AuthName www.cosat.biz
+# IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti* */.inc
+
+RewriteEngine on
+
+# ==============================================================================
+# Error pages
+# To use it on EasyPHP, remember to add up the site's folder on each line.
+# For instance : 
+# ErrorDocument 404 /www.html4.com/mime/markup/html/error_pages/404.php
+#-------------------------------------------------------------------------------
+ErrorDocument 400 /erreur.php?id=400
+ErrorDocument 401 /erreur.php?id=401
+ErrorDocument 403 /erreur.php?id=403
+ErrorDocument 404 /erreur404.php
+ErrorDocument 405 /erreur.php?id=405
+ErrorDocument 500 /erreur.php?id=500
+# ==============================================================================
+
+RewriteRule ^/?photo/([0-9]+)/([0-9]+)$ photoget_web.php?No=$1&Idx=$2 [L]
+
+
+#-------------------------------------------------------------------------------
+# A good web site is a 404-less one, so, there should be a redirection for any
+# removed page. "Gepardenforelle" refers to the SEO contest I've participated in
+# 2004 (best rated 190/1.400.000 pages)
+# redirect ancien
+Redirect permanent /informatique/ http://www.cosat.biz/index.php?%1
+Redirect permanent /cellulaire/ http://www.cosat.biz/index.php?%1
+Redirect permanent /fete.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /princinfo.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /speciaux.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /systeme.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /systemeX2.php http://www.cosat.biz/index.php?%1 
+Redirect permanent /drivers.php http://www.cosat.biz/support.php?%1 
+Redirect permanent /lang.php http://www.cosat.biz/support.php?%1 
+Redirect permanent /admin/spaw/spacer.gif http://www.cosat.biz/index.php?%1
+
+################################################################################
+# Éviter que les gens crée un hotlink sur mes images. - source : html4.com
+# Preventing people to hotlink my images.
+# First part is for direct requests.
+# Second part is for pages included in a frameset, for instance within an image
+# search result in Google.
+# Third is for avoiding a loop.
+# Fourth is to match only images with case-insensivity, as the [NC] flag means
+# "no case".
+#-------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !(localhost|cosat\.biz) [NC]
+RewriteCond %{REQUEST_URI} !logo\.gif [NC]
+RewriteCond %{REQUEST_URI} \.(jp..?|gif|png|swf)$ [NC]
+RewriteCond %{REQUEST_URI} \.js(\W.*)$ [NC]
+RewriteRule ^.*$ http://www.cosat.biz/gifs/logo.gif [R,L]
+
+#-------------------------------------------------------------------------------
+# RewriteCond %{HTTP_REFERER} !^$
+# RewriteCond %{HTTP_REFERER} !(cosat\.biz) [NC]
+# RewriteCond %{REQUEST_URI} !logo\.gif [NC]
+#  RewriteCond %{REQUEST_URI} \.js(\W.*)$ [NC]
+# RewriteRule ^.*$ http://www.cosat.biz/gifs/logo.gif [R,L]
+################################################################################
+RewriteCond %{HTTP_USER_AGENT} iearthworm [NC]
+RewriteRule .* - [F,L]
+
+# ==============================================================================
+RewriteCond %{HTTP_USER_AGENT} !^((user-agent\W\s*)?mozilla) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(.*mozilla/4\.0\s\(compatible;\smsie) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(Apple-PubSub) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(avantsbrowser) [NC]
+RewriteCond %{HTTP_USER_AGENT} !(opera/[0-9].[0-9]+) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(lynx) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(links) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^((feedfetcher-|Mediapartners-)?google) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(yahoo|y\!oasis|compatible;\sy\!j-srd/1\.0;\shttp:\/\/help\.yahoo\.co\.jp\/help\/jp\/search\/indexing\/indexing-27\.html) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(MicrosoftsPocketsInternetsExplorer|msn|MSIE|MSRBOT) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(blackberry|nokia|sony|docomo|samsung|smartphone|vodafone) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(about) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(alice) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(alltheweb) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(altavista) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(aol) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(ask) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(baidu) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(cnn) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^((KDDI.*\()?dillo/) [NC]
+RewriteCond %{HTTP_USER_AGENT} !(Metadata.Scr?aper) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(gigablast) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(gigabot) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(ia_archiver) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(Kazehakase/[0-9]+\.[0-9]+\.[0-9]+) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(live) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(looksmart) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(lycos) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(mamma) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(najdi) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(netscape) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(safari) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(search) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(seznam) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(SurveyBot/2\.3\s\(Whois\sSource\)) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(SPIP) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(virgilio) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(voila) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(w3c) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(psbot) [NC]
+RewriteCond %{HTTP_USER_AGENT} !^(yandex) [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+
+# Never put a favicon a site root
+# RewriteCond %{REQUEST_URI} favicon\.ico
+# RewriteRule !mime/ico/favicon\.ico http://html4.com/mime/ico/favicon.ico [R=301,L]
+
+# ==============================================================================
+
+
+# As this site is about referer spam, we do not want to block a search from a 
+# search engine if the search is about a referer spam.
+# For instance :
+#     http://www.google.com/search
+#                                 ?hl=en
+#                                 &lr=
+#                                 &rls=GGLD%2CGGLD:2005-04%2CGGLD:en
+#                                 &q=naked+mature+women+naked-mature-women.org
+# So there will be no blocking of any kind for their majesties.
+# That may cause some dirty query strings to go through. If a spammer spoofs his
+# referer string with, let's say :
+#          http://www.google.fr/search?hl=en&q=phentermine&btnG=Google+Search
+# You will get the result page for the query "phentermine".
+# You can either refer to HTTP_REFERER or HTTP_HOST, but I'm experiencing
+# disapointing results with HTTP_HOST.
+# IMPORTANT : HTTP_HOST does not begin with "http://" !!!
+# As this site is about spam, some of its URLs may contain otherwise filtered
+# keywords, so, we must avoid to block some legit requests.
+# This list also contains (nearly) all the search engines that have issued a
+# request to my site.
+# ------------------------------------------------------------------------------
+# The keywords translate|translation|translatedPage have been added html.com's name 
+# due to a vulnerability. "altavista\.com" had to be changed too.
+# You will learn more soon at :  http://localhost/www.html4.com/mime/markup/php/how_to_fr/how_to_system_fr/how_to_system_19.php
+# This page may not be on line yet.
+# LOL: my little crew of spammers have tried a site (freetranslation.com) which
+# used another URL syntax, but which matched the regexp.
+RewriteCond %{HTTP_REFERER} ^http://((\w)+\.?)*\W(babelfish|translate|translation|translatedPage).*(&[\w]+=http((://)|(://))www\.cosat\.biz((/)|(/))) [NC]
+RewriteRule ^(.*)$ - [L]
+# Google's cache
+RewriteCond %{HTTP_REFERER} (search\?q=cache:[\w\-]+:www\.cosat\.biz) [NC]
+RewriteRule ^(.*)$ - [L]
+# ------------------------------------------------------------------------------
+RewriteCond %{REQUEST_URI} /((buscador|buscar|busqueda|pesquisa|recherche|search|zoeken)(\?|\.|=))|urlcheck|google|(\?(p|q)=)|(&(url|redir)=) [NC]
+RewriteRule ^(.*)$ - [L]
+RewriteCond %{HTTP_REFERER} ^http://([a-z0-9\-]+\.)*(buscador|buscar|busqueda|pesquisa|recherche|search|zoeken)\. [NC]
+RewriteRule ^(.*)$ - [L]
+# ------------------------------------------------------------------------------        
+# The user-agent string may be faked, so you may comment this last rule.
+RewriteCond %{HTTP_USER_AGENT} (bot\.(htm|php))|slurp|jeeves|teoma|@|crawl|robot [NC]
+RewriteRule ^(.*)$ - [L]
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(163\.com|7search\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(a9\.com|abc4\.com|abcsok\.no|accoona\.cn|adelphia\.net|alexa|allcrawl\.com|allsearchengines|alltheinternet\.com|alltheweb\.com|([^h]\.altavista\.com)|amazon\.com|amnesi\.com|ampleo\.com|answers\.com|anywho\.com|aol\.|armstrongmywire\.com|ask\.com|att\.net|attworldnet\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(babieca\.com|bellsouth\.net|blingo\.com|blueyonder\.co\.uk|bluewin\.ch|btopenworld\.com|business\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(charter\.net|chello\.|clix\.pt|club-internet\.fr|comcast\.net|computer5\.com|cs\.com|cox\.net)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(dashbar\.com|deja\.com|deoji\.com|devsearch\.com|devshed\.com|dewa\.com|directhit\.com|dmoz\.org|dshield.org)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(earthlink\.net|eircom\.net|eniro|(excite\.(com|co\.jp))|eo\.st|exalead\.fr)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(Findit2000\.net|findwhat\.com|free\.fr|freenet\.de|frequentfinders\.com|funkycat\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(genieknows\.com|go\.com|go2net\.com|gogole\.fr|goo\.ne\.jp|google\.|goshdarn\.com|grandecom\.net)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(home\.nl|hotbot\.com|hwg\.org)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(ibound\.com|icio\.us|icq\.com|incredimail\.com|infohiway\.com|infomak\.com|(infoseek\.)|infospace\.com|intelliseek\.com|invisibleweb\.com|iprimus\.com\.au|ixquick\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(jumpcity\.com|jux2\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(kanoodle\.com|knology\.net|krone\.at)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(libero\.it|linkcentre\.com|linkmaster\.com|links2go\.com|livedoor\.com|lookup\.com|lycos\.)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(mail\.ru|msn\.|mozbot\.fr|mozilla\.org|mysearch\.com|myway\.com|mywebsearch\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(nbci\.com|netscape\.|netster\.com|nexor\.com|northernlight\.com|ntlworld\.com|numericable\.fr)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(oceanfree\.net|online\.no|optonline\.net|overture\.com|ozu\.es)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(pathfinder\.com|peoplepc\.com|primusonline\.com\.au|profusion\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(qq\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(reference\.com|rocketlinks\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(sanook\.com|scrubtheweb\.com|search\.aol\.|search\.com|search4info\.com|searchfrombrowser\.biz|searchhound\.com|SearchKing\.com|seeq\.com|seochat|seznam\.cz|shaw\.ca|sify\.com|skynet\.be|snap\.com|splatsearch\.com|start\.no|startpagina\.nl|startsiden\.no|starware\.com|subjex\.com|supercybersearch\.com|supereva\.com|superonline\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(t-online\.de|tesco\.net|thenet1\.com|togglebot\.com|toile\.com|topclick\.com|topxplorer\.de)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(ubbi\.com|usseek\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(valuecom\.com|verizon\.net|versatel\.nl|vinden\.nl|virgilio\.it|vol\.at|vizsla\.hu)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(wdirect\.com|webcrawler\.com|webmasterworld|websearch2k\.com|webventure\.com|whatuseek\.com|where2go\.com|\.wink\.com|wowway\.com|wwwhunter\.com|wxs\.nl)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(yahoo\.|yisou\.com)) [NC]
+RewriteCond %{HTTP_REFERER} ^(http://([a-z0-9\-]+\.)*(zensearch\.com|zoomtown\.com|zsearch\.net)) [NC]
+# ==============================================================================
+# A new series dedicated to modern chemistry. BTW : NEVER ANSWER TO A MAIL FROM
+# PEOPLE SELLING PHARMACY.
+# Nota : any space character MUST be escaped within a regexp in an .htaccess
+# file. Thanks, Jim (Jim Morgan is a mod on www.webmasterworld.com).
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*a(ciphex|ctonel|cyclovir|dipex|llegra|mbien|nabolic|tivan).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*b(ontril|upropion|uspar|uspirone|utalbital).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*c(arisoprodol|elebrex|elexa|ialis|laritin|lomid|lonazepam|odeine|yclobenzaprine).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*d(iabete|iazepam|idrex).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*e(ffexor|npresse|sgic).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*f(amvir|ioricet|lexeril|lextra|lonase|luoxetine).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*h(oodia|ydrocodone).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*i(mitrex|onamin).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*l(evitra|exapro|ipitor|iposuction|oestrin|orazepam).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*m(assage|eridia|orphine).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*n(aproxen|asacort|eurontin|exium|ordette|ursing).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*p(axil|harmacies|harmacy|hentermine|hendimetrazin|heromone|rescription|revacid|rilosec|ropecia|roscar|rozac).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*r(italin|ivotril).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*s(kelaxin|urgery).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*t(enuate|ramadol|riphasil).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*u(ltracet|ltram).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*v(alium|altrex|aniqa|iagra|icodin|ioxx).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*w(eight\ *loss|ellbutrin).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*x(anax|enical).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*z(anaflex|ebutal|ithromax|oloft|yban|yrtec).*)$ [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+# Forbidding parasites by keywords
+# ------------------------------------------------------------------------------
+# First series will match any referrer containing one of the listed keywords.
+# You SHOULD read carefully these lists. Depending on your business,
+# you may not want "broker" or "insurance" be within the forbidding keywords.
+# BEWARE ALSO THAT ANY DOMAIN NAME WITH "dick" WILL BE THWARTED, 
+# including "mobydick.com". This may be tricky, but working with short keywords
+# as "dick", or "loan" may open the way to such inconveniences.
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*[0-9]+yo.*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*a(cter|ctres|d.?l.?t|ika|isan|licia|lissa|lysia|mateuer|mateur|mateur|matuer|m+atur|mauter|meteur|meture|mirican|miture|muture|nal|namated|nderso|nelli|nial|pplegate|sain|sian|sion|ssho|uction|ustrailia).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*b(abe|arely|ackgammon|ackroom|dsm|eautifull|estial(ity|-|.)|etting|(ig.?tit)|itch|lack-*girl|lack-*jack|low-*job|oob|reast|roker).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*c((ar-?rental)|asino|ataloge|atoon|bmall|el(e|i)b|enterfold|hearleader|hubby|igarette|limax|lito|lits|ock|onsolidation|ouple|lose-up|reampie|reditcard|umfiesta|umming|umshot|unt).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*d(ebt|eepthroat|eflor|egree|eluxe|ick|ischarge|ivorce|ivx|omina|(drug(s|-))).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*e(bony|jacul|nlarge|roti(c|sh|x)|scort).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*f(acial|emale|emdom|etish|inancing|ingering|isting|uck|uking|undraising|usker).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*g(ambling|angbang|ay|enital|ratis|yn.co).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*h(airy|ardcor|entai|ermaphrodite|old-?em|orny|otbabe|ousewife|us*tler).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*i(llegal|mplant|(n(c|s)est)|nsurance|nterco.?rse|nter+acial).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*k(aras|inky).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*l(actat|atina|esbi.?n|esbo|ingerie|oan|ol+it+a).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*m(arriage|asoch|ast.rb|ature|edication|emcova|ilf|ortgage).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*n(.k+.(d|t)|ackt|aturist|aughty|etworkclips|ipple|ude|udis|ymph).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*o(lder(wo)*m(a|e)n|nlinecredit|rgasm|rgy).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*p(amela|antie|anty|eeing|enhouse|enis|ervert|ierce|iercing|imp|issing|layboy|oker|onog|o.?rn|reteen|rno|rosti|ubescent|usse|ussie|uss?y).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*q(poi).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*r(acial|efinance|esort|ingtone|oulette|oyalfreehost).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*s(apph|choolgirl|elfsucker|(lot-?machine)|haved|hemail|hemale|hitt|pank|pycam|quirting|toriespics|triptease|triper|triping|tripper|uc?k|ummervacation|wingers).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*t(aboo|itted|itti|itty|onya|opless|orture|ransgend|ransvestit|wink).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*u(.?derage|n.ensored|nthorize|pskirt|urinat).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*v(.gina|edio|eido|ibrator|idieo|idioe|idio|idoe|iedo|ouyer|oyeur|oyuer).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*w(ank|ebcam|em.n|hore|ifey|sop).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*x(ondemand|rated).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*y(dass|earold|oungster|oungteen).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*z(arqawi).*)$ [NC]
+RewriteRule .* - [F,L]
+# ------------------------------------------------------------------------------
+# Following regexp will match any referrer containing one of the listed
+# keywords preceded or followed by a dot or a dash, or a slash for they are
+#  short and may be part of another -clean- keyword.
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*(-|\.|/)(anal|ass|butts?|buy|cash|cheap|(dat(e|ing))|dirty|lick|lot+o|males?|mates|oral|pee|(pic(s|t))|pills?|rapes?|ruleta|(s(ado|cat|ex|lip|lit|lut))|teen|tits?|videos?|wet|yiffy).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*(anal|ass|butts?|buy|cash|cheap|(dat(e|ing))|dirty|lick|lot+o|males?|mates?|oral|pee|(pic(s|t))|pills?|rapes?|ruleta|(s(ado|cat|ex|lip|lit|lut))|teen|tits?|videos?|wet|yiffy)(-|\.|/).*)$ [NC]
+RewriteCond %{HTTP_REFERER} ^(.*(-|\.|/)(butt|hot|x)(-|\.|/).*)$ [NC]
+RewriteRule .* - [F,L]
+
+# Beware : The following rime must be case-sensitive not to match "XXXX:++++"
+RewriteCond %{HTTP_REFERER} ^(.*xx+[^:].*)$
+RewriteRule .* - [F,L]
+# ==============================================================================
+# German spammers
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*m(oese|uschi).*)$ [NC]
+
+RewriteCond %{HTTP_REFERER} ^(.*k(asino|lingelton|redit).*)$ [NC]
+
+RewriteCond %{HTTP_REFERER} ^(.*v(ersicherung).*)$ [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+# A new series dedicated to piracy.
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*(mp3|mpe?g|divx|dvd|warez).*)$ [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+# Anonymizers. Something to hide, kid?
+# Beware to avoid any space by a \s in any regexp.
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} (Field\sblocked|Bloqueado|ProxyWay|Outpost|Agnitum|anonym|steganos) [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+# [...] This will stop many of the 'bots' or e-mail collecting softwares
+# from sucking e-mail addresses from web pages and adding them to
+# their spam lists. However this will not work 100% of the time, as
+# some do not identify themselves, but its a good start. [...]
+# See http://www.depiction.net/?id=stopspam
+# See http://www.webmasterworld.com/forum13/687.htm
+# I've added som other harvesters, like Clariabot, Diamondbot.
+# See http://www.webmasterworld.com/forum39/2573.htm
+# Xenu Link Sleuth is a link checker ( http://home.snafu.de/tilman/xenulink.html).
+# It has been used to crawl this site through dirty IPs (61.246.95.8, 61.246.98.63 
+# and 61.247.247.47)
+# PeerFactor 404 crawler -> http://ow.bbclone.de/2005/11/08/search-for-the-non-existing-peerfactor-404-crawler/
+#
+# BEWARE: A regexp can't be cut into pieces by a white space without being
+# enclosed into paranthesis. Space can be replaced by a \s or a dot.
+# "DataCha0s/2.0" signs an old awstats exploit. See "Searching the logs for hack attempts"
+# ( http://localhost/www.html4.com/mime/markup/php/how_to_en/how_to_system_en/how_to_system_4.php#p4)
+# UtilMind HTTPGet (IP 85.240.163.30) See http://www.webmasterworld.com/forum33/108-2-10.htm
+# DA 7.0 See http://www.webmasterworld.com/forum11/2816.htm
+# I'll not ban such UA as CuteFTP and httrack for... I use them.
+# To use website copier, offline browser is not a bad policy. To use robots to
+# collect e-mails addresses is.
+# surfingFOLiO is... See this page http://www.bhacorp.com/support/faq_gold7/14.html
+# Some of them come from Edith Frost's weblog. Thanks Edith.
+# http://www.edithfrost.com/index.php/weblog/comments/spot_the_bot/
+# ------------------------------------------------------------------------------
+# ==============================================================================
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/3\.0\s\(compatible\)$ [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla/3.Mozilla/2.01 [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mozilla.*NEWT
+RewriteRule .* - [F,L]
+# ==============================================================================
+# http://www.webmasterworld.com/forum9/9538.htm
+#RewriteCond %{HTTP_REFERER} botmaster [NC,OR]
+#RewriteCond %{HTTP_USER_AGENT} botmaster
+#RewriteRule .* - [F,L]
+# ==============================================================================
+# A collection of odd strings found in user-agent strings or referer strings.
+# ==============================================================================
+# ------------------------------------------------------------------------------
+# A user-agent (or a referer) which string is :
+# XXXX:+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Well, the blog of Edith Frost told me it signaled someone behind a firewall.
+# That may also be the case for the series to dashes, so I commented this set of lines.
+# and another which is a series of dashes
+# RewriteCond %{HTTP_USER_AGENT} ^xx+:\++$ [NC,OR]
+# RewriteCond %{HTTP_REFERER} ^--+$ [NC,OR]
+# RewriteCond %{HTTP_REFERER} ^xx+:\++$ [NC]
+# RewriteRule .* - [F,L]
+# ------------------------------------------------------------------------------
+# An attempt to hack the site passing strange parameters to the PERL LWP library.
+# See : http://isc.sans.org/diary.php?date=2004-12-25
+# ==============================================================================
+# See URL
+RewriteCond %{HTTP_REFERER} munax\.com\/referer\.htm
+RewriteRule .* - [F,L]
+# ==============================================================================
+# See URL
+#RewriteCond %{HTTP_REFERER} kateep\.com [OR]
+#RewriteCond %{REMOTE_HOST} 202\.142\.220\.195
+#RewriteRule .* - [F,L]
+RewriteCond %{HTTP_REFERER} therafy\.free\.fr
+RewriteRule .* - [F,L]
+# ------------------------------------------------------------------------------
+#RewriteCond %{HTTP_USER_AGENT} lwp [NC,OR]
+RewriteCond %{QUERY_STRING} chr\([0-9]+\) [OR]
+RewriteCond %{QUERY_STRING} system\(
+RewriteRule .* - [F,L]
+# ------------------------------------------------------------------------------
+# And I don't like backslashes neither.
+# ------------------------------------------------------------------------------
+#RewriteCond %{HTTP_USER_AGENT} \\ [OR]
+RewriteCond %{QUERY_STRING} \\ [OR]
+RewriteCond %{HTTP_REFERER} \\ [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+RewriteCond %{QUERY_STRING} ';DECLARE%20 [NC]
+RewriteRule .* - [F,L]
+# ------------------------------------------------------------------------------
+# And URLs as parameter within the referer string.
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+RewriteCond %{REQUEST_URI} l=menu [OR]
+RewriteCond %{QUERY_STRING} l=menu
+RewriteRule .* - [F,L]
+
+##################################################################################################################################
+##################################################################################################################################
+##################################################################################################################################
+##### Une r`gle mise de coté pour COSAT - Empêche les sous domaine - Antillas/Hermes de communiquer entre eux
+#There sould be neither spaces nor accentuated chars in a request uri, ie in any page name
+# 20=whitespace, 5B and 5D are squere brackets, 22 is a double quote
+# Cosat - RewriteCond %{REQUEST_URI} %20|\s|\[|\]|%5B|%5D|%22 [OR]
+# Cosat - RewriteCond %{QUERY_STRING} %20|\s|\[|\]|%5B|%5D|%22
+# Cosat - RewriteRule .* - [F,L]
+##################################################################################################################################
+##################################################################################################################################
+##################################################################################################################################
+# No asp, jsp, cfm pages on my server
+RewriteCond %{REQUEST_URI} \.(asp|jsp|cfm)$ [OR]
+RewriteCond %{QUERY_STRING} \.(asp|jsp|cfm)$
+RewriteRule .* - [F,L]
+# No request beginning by a double slash
+RewriteCond %{REQUEST_URI} ^// [OR]
+RewriteCond %{QUERY_STRING} .*=//
+RewriteRule .* - [F,L]
+# Neither that
+RewriteCond %{REQUEST_URI} /_/ [OR]
+RewriteCond %{QUERY_STRING} /_/
+RewriteRule .* - [F,L]
+
+# Nor that (used to pass linux commands as parameters to a script)
+RewriteCond %{QUERY_STRING} &cmd=
+RewriteRule .* - [F,L]
+# Nor that
+RewriteCond %{REQUEST_URI} sohoadmin [OR]
+RewriteCond %{QUERY_STRING} sohoadmin
+RewriteRule .* - [F,L]
+
+RewriteCond %{QUERY_STRING} (mosConfig|tinyMCE)_\w+=
+RewriteRule .* - [F,L]
+
+RewriteCond %{QUERY_STRING} waroot=http
+RewriteRule .* - [F,L]
+
+RewriteCond %{QUERY_STRING} =ftp
+RewriteRule .* - [F,L]
+# No url allowed in any request uri
+RewriteCond %{QUERY_STRING} path.?=http
+RewriteRule .* - [F,L]
+
+# No resource with an ending '?'
+RewriteCond %{REQUEST_URI} .*\?+$ [OR]
+RewriteCond %{QUERY_STRING} .*\?+$
+RewriteRule .* - [F,L]
+
+
+# An image is not a valid referer.
+RewriteCond %{HTTP_REFERER} ^(http://.*\.(jpg|png|gif))$
+RewriteRule .* - [F,L]
+# Combining requests is no way!
+RewriteCond %{REQUEST_URI} \+(GET|POST)\+ [OR]
+RewriteCond %{QUERY_STRING} \+(GET|POST)\+
+RewriteRule .* - [F,L]
+RewriteCond %{QUERY_STRING} ^.*REQUEST.*$
+RewriteRule .* - [F,L]
+RewriteCond %{HTTP_REFERER} PLM=0 [OR]
+RewriteCond %{QUERY_STRING} PLM=0
+RewriteRule .* - [F,L]
+# ==============================================================================
+RewriteCond %{HTTP_REFERER} \.ru$
+RewriteRule .* - [F,L]
+# ==============================================================================
+# A strange one that gave me http://www.voli-aerei.eu.tt/.
+# This site was spammng HTML4.COM. Its PHP engine was filling the user-agent 
+# string field string with a random cell of an array to fake the string, but
+# being poorly designed, if missed some index.
+# ------------------------------------------------------------------------------
+#RewriteCond %{HTTP_USER_AGENT} ^Array$
+#RewriteRule .* - [F,L]
+# ==============================================================================
+# Last of the many: I don't like referrers equals to "http://".
+# ------------------------------------------------------------------------------
+#RewriteCond %{HTTP_REFERER} ^http://$
+#RewriteRule .* - [F,L]
+# ------------------------------------------------------------------------------
+# ==============================================================================
+# Banning websites which domain names contain two dashes, as in :
+#    http://256mb-sdram-pc100.0xfe.biz/
+#    http://personal-injury-lawyer.1.am/
+#    http://barely-legal-teenb.com/
+#    http://www.hallo-online-versicherungsvergleich.de
+# ... or a double dash in a referer string.
+# ... or 5 or more dots like in www.dub1.sub2.sub3.co.uk
+# You may consider these rules not suitable and not use them.
+# The 5-dots one is rather dull, I know.
+# ^(
+#     [^/]*
+#         (
+#             (
+#                 ([a-z0-9]+-){2,}
+#             )
+#             |
+#             (
+#                 ([a-z0-9]+\.){5,}
+#             )
+#             |
+#             (--+)
+#         )
+#     .*
+# )$
+# ------------------------------------------------------------------------------
+#RewriteCond %{HTTP_REFERER} (http://([^/]*((([a-z0-9]+-){2,})|(([a-z0-9]+\.){5,})|(--+)).*)(/.*)?$) [NC]
+#RewriteRule .* - [F,L]
+# ==============================================================================
+# A gang. See http://www.html4.com/mime/markup/php/how_to_en/how_to_system_en/how_to_system_20.php
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*/[0-9]{6}-[0-9]{2}-[0-9]\.html)$ [NC]
+RewriteRule .* - [F,L]
+# ==============================================================================
+# An odd collection, all hosted on 64.7.209.58...
+# See  http://localhost/www.html4.com/mime/markup/php/how_to_en/how_to_system_en/how_to_system_16.php
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*(/[0-9])?/main\.htm\?id=ballaire)$
+RewriteRule .* - [F,L]
+# ==============================================================================
+# Another odd collection all hosted on 66.230.129.242...
+# ------------------------------------------------------------------------------
+RewriteCond %{HTTP_REFERER} ^(.*/t1/pps=wm/)$
+RewriteRule .* - [F,L]
+# ==============================================================================
+# ==============================================================================
+# Larry7 is the pseudo of a spammer who owns a galaxy of links farms
+# See  http://localhost/www.html4.com/mime/markup/php/how_to_en/how_to_system_en/how_to_system_17.php#p17
+# ------------------------------------------------------------------------------
+# Forbidding access by IP
+# 86 -> trans-mid.com
+# 92 whatislev.com
+RewriteCond %{REMOTE_ADDR} (66\.29\.20\.(86|92))
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# 8->tailro.com
+# 23->motrr.com
+# 28->collinsky.com See http://dns.measurement-factory.com/cgi-bin/poison_browser.pl?qn=collinsky.com
+# 39->colunn.com
+RewriteCond %{REMOTE_ADDR} (67\.18\.45\.(8|23|28|39))
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# covver.com
+RewriteCond %{REMOTE_ADDR} (67\.18\.46\.28)
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# colkk.com 
+RewriteCond %{REMOTE_ADDR} (67\.18\.48\.84)
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# 112->foolia.com
+# 113->basdt.com
+# 114->ovalx.com
+RewriteCond %{REMOTE_ADDR} (69\.56\.201\.(112|113|114))
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# colinskyy.com, genespp\.com, warrpp.com
+RewriteCond %{REMOTE_ADDR} (70\.85\.105\.(135|136|137))
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# pimp-my-ride-tuning.com
+RewriteCond %{REMOTE_ADDR} (70\.85\.32\.139)
+RewriteRule ^(.*)$ http://%1 [R=301,L]
+# MISSING IPS
+# trans-union-review.com and harry-potter-fire.com (the server 8.10.120.29 hosts other -maybe clean- sites)
+# membertwo.com, molords.com, var28.com (the server 72.29.71.35 hosts other -maybe clean- sites)
+# ------------------------------------------------------------------------------
+# Forbidding access by domain name
+# ------------------------------------------------------------------------------
+# ==============================================================================
+# Second set : 4onlinewagers.com, adapterzapper.com, adspoll.com, alabamaamuniversity.com, autosearchhome.com, base-poker.com,
+# bmw-guide.com, boobs-juggs.com, bound-chicks.com, canbecured.com, carsearchhome.com, casinos4spain.com, eros-toon.com,
+# exclamation2betsystems.com, flower4us.com, fourprong.com, hentaiandtoons.com, itcanbecured.com, money-plans.com, ogatagakki.com,
+# online-bingo-01.com, partofthetest.com, petsellers.net, poker4spain.com, satellitebeacon.com, stocktip4u.com, stocktipsforu.com,
+# suvsearcher.com, suvsearchhome.com, teacup.com, trucksearcher.com, unique-casino.net, vadoptions.com, vcats.com, vmousetrap.com,
+# vplaymate.com, vquality.com, vtoyshop.com, xmlguy.com
+# 
+#RewriteCond %{HTTP_REFERER} !^$ [NC]
+#RewriteCond %{HTTP_REFERER} !^(http://((localhost|127\.0\.0\.1)/)?([0-9a-zA-Z\-]+\.)+[a-zA-Z]+) [NC]
+#RewriteRule (.*) - [F,L]
+# Clever porn sites have chosen to hotlink an image of mine, and referer-spammed me through translated pages.
+RewriteCond %{HTTP_REFERER} ^http://([a-z0-9\-]+\.)*(babelfish|translate|translation|translatedPage) [NC]
+RewriteCond %{QUERY_STRING} !(&[\w]+=http://www\.cosat\.biz/) [NC]
+RewriteCond %{QUERY_STRING} (&[\w]+=(http://[^%]+/)) [NC]
+RewriteRule .* - [F,L]
+RewriteCond %{QUERY_STRING} (babelfish|translate|translation|translatedPage) [NC]
+
+# ==============================================================================
+# Forbidding some IP ranges
+RewriteCond %{REMOTE_HOST} ^194\.8\.7[45]\.
+RewriteRule .* - [F,L]
+
+# ==============================================================================
+RewriteCond %{QUERY_STRING} /mobile [OR]
+#RewriteCond %{QUERY_STRING} /palm [OR]
+RewriteCond %{QUERY_STRING} /pda [OR]
+RewriteCond %{QUERY_STRING} /text [OR]
+RewriteCond %{QUERY_STRING} /wap [OR]
+RewriteCond %{QUERY_STRING} /wireless
+#RewriteRule ^(.*)$ http://www.cosat.biz/index.php?%1 [F,L]
+RewriteRule .* - [F,L]
+
+RewriteCond %{REQUEST_URI} /palm/
+#RewriteRule .* - [F,L]
+RewriteRule ^(.*)$ http://www.cosat.biz/index.php?%1 [F,L]
+
+Order Allow,Deny
+# C GOOGLE COCO Deny from 66.249.73.172
+# C GOOGLE COCO Deny from 66.249.73.177
+Deny from 74.50.125.116
+Deny from 77.221.130.17
+
+# The munax.com issue (http://www.webmasterworld.com/search_engine_spiders/3616493.htm)
+deny from 82.99.30.0/30
+deny from 85.58.13.250
+deny from 89.191.65.105
+
+# The seedmain.com issue
+deny from 79.176.0.33
+deny from 79.178.130.218
+deny from 79.180.140.158
+deny from 79.181.116.123
+deny from 79.182.126.224
+
+# The WebDataCentre.com issue
+deny from 66.90.118.101
+
+# Quelques règles qui appartiennent à Cosat
+# Des amis sur un serveur FRANCE kimsuffi - serveur dedier
+deny from 188.
+# deny from 109. aussi de france ???
+# M'indique la france ??? 178.255.215.72 crawl08.exabot.com
+# deny from 178.
+# Des amis de UKRAINE
+deny from 212.113.48
+deny from 194.247.12
+deny from 194.247.13
+# Des amis de RUSSIE
+deny from 89.189.184.0/21
+deny from 91.210.
+deny from 176.
+# Des amis de MOLDAVIE j'ai ajouter 100
+deny from 95.100.
+# Des amis de LETTONIE
+deny from 193.105.240.
+# Des amis de CHINE
+deny from 112.
+deny from 113.
+#deny from 58.61.164.
+#deny from 124.115.1.
+#deny from 114.
+#deny from 119.
+#deny from 183.
+# Des amis de Romania
+deny from 89.33.
+# Des amis du BELARUS
+# Des amis de HONGRIE
+# deny from 94. // Aussi d'europe
+# Des amis d'afrique Maroc
+deny from 41.
+
+# deny from .*bellespics\.eu.*
+# deny from .*pixfr\.eu.*
+# deny from .*frpix\.eu.*
+
+#-------------------------------------------------------------------------------
+# Quelques règles qui appartiennent à Cosat
+# RewriteCond %{REMOTE_ADDR} (212\.117\.172\.[0-9][0-9][0-9])
+#------------------------------------------------------------------------------- 
+RewriteCond %{REMOTE_ADDR} ^114.* [OR]
+RewriteCond %{REMOTE_ADDR} ^119.* [OR]
+RewriteCond %{REMOTE_ADDR} ^183.*
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+RewriteCond %{REMOTE_ADDR} 95.108.158.*
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} 124.115.1.* 
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} 58.61.164.* 
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} ^114\.80\.93\.71$  
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} ^69\.84\.207\.[0-9][0-9][0-9]$  
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} ^119\.147\.6\.60$
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} ^119\.147\.75\.137$
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+RewriteCond %{REMOTE_ADDR} ^119\.147\.75\.140$
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+#RewriteCond %{REMOTE_ADDR} ^96\.20\.176\.[0-9][0-9][0-9]$  
+#RewriteRule ^(.*)$ - [L]
+
+#SetEnvIfNoCase Referer ".*(block-this-referrer|and-this-referrer|and-this-referrer).*" BlockedReferer
+
+# ------------------------------------------------------------------------------
+# And URLs, as paramter.
+# ------------------------------------------------------------------------------
+#********************************************
+# ***** COSAT - Modif pour mon site
+#********************************************
+RewriteCond %{REQUEST_URI} !=http:\/\/(www\.)?cosat\.biz
+RewriteCond %{REQUEST_URI} !=http:\/\/(www\.)?cosat\.biz\/hermes\/
+RewriteCond %{REQUEST_URI} =http
+RewriteRule .* - [F,L]
+#********************************************
+# COSAT - Modifier pour mon site
+#********************************************
+RewriteCond %{QUERY_STRING} !(&[\w]+=http://www\.cosat\.biz/) [NC]
+RewriteCond %{QUERY_STRING} !(&[\w]+=http://www\.cosat\.biz/hermes/) [NC]
+RewriteCond %{QUERY_STRING} (&[\w]+=(http://[^%]+/)) [NC]
+RewriteRule .* - [F,L]
+#********************************************
+# ***** COSAT - Site qui me cause un probleme
+#********************************************
+RewriteCond %{HTTP_REFERER} bellespics\.eu [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+#RewriteRule ^(.*)$ - [L]
+
+RewriteCond %{HTTP_REFERER} pppics\.com [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+RewriteCond %{HTTP_REFERER} pixfr\.eu [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+RewriteCond %{HTTP_REFERER} frpix\.eu [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+RewriteCond %{HTTP_REFERER} picsfr\.eu [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+RewriteCond %{HTTP_REFERER} fotofr\.eu [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+RewriteCond %{HTTP_REFERER} frfoto\.eu [NC]
+RewriteCond %{HTTP_REFERER} ^.*foto.*\.eu [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+#  http://www.picornot.com/
+RewriteCond %{HTTP_REFERER} picornot\.com [NC]
+RewriteRule ^.*$ http://www.grosses-fesses.com/wp-content/gallery/galerie5/15.jpg [R,L]
+
+#RewriteCond %{REQUEST_URI} photoget_web.php%3FNo%3D4 [NC]
+#RewriteRule ^(.*)$ - [L]
+
+#php_value auto_prepend_file global_prepend.php
+#php_value auto_append_file global_append.php
+
+allow from all

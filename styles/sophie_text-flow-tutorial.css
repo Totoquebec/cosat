@@ -1,0 +1,210 @@
+@import url(../css/copy.css);
+
+body {
+color: #eee8aa;
+background: #000;
+}
+
+#content {
+color: #eee8aa;
+background: #000 url("../assets/bk_sophie_marceau.jpg") no-repeat;
+}
+
+#content a[href]{color: #f60;}
+
+/* anchor style non-compliant browsers */
+/* someday MSIE will be CSS compliant - ya think? */
+/* MSIE the new NN4!!! Holding back the Web! */
+a.f60 {color: #f60;}
+
+/* paragraph style options tested */
+#content p-null {padding: 0 20px; text-align: left;}
+#content p-null {padding: 0 20px; text-align: center;}
+#content p-null {padding: 0 20px; text-align: right;}
+#content p {padding: 0 20px; text-align: justify;}
+
+/* sand-bag div styles used while adjusting page flow */  
+#content div {border: 1px solid #0f0; color: #f30; font-size: 12px; font-weight: bold;}
+#content div-null span {border: 1px solid #0f0; color: #f30; font-size: 12px; font-weight: bold;}
+
+/* begin sand-bag divs */
+/* declare left float, clear */
+#sml-01,#sml-02,#sml-03,#sml-04,
+#sml-05,#sml-06,#sml-07,#sml-08,
+#sml-09,#sml-10,#sml-11,#sml-12 {
+float:left;
+clear:left;
+padding:0;
+}
+
+/* left bank of the river! */
+#sml-01 {
+width: 320px;
+height: 60px;
+}
+
+#sml-02 {
+width: 340px;
+height: 35px;
+}
+
+#sml-03 {
+width: 365px;
+height: 32px;
+}
+
+#sml-04 {
+width: 400px;
+height: 32px;
+}
+
+#sml-05 {
+width: 345px;
+height: 71px;
+}
+
+#sml-06 {
+width: 320px;
+height: 48px;
+}
+
+#sml-07 {
+width: 370px;
+height: 75px;
+}
+
+#sml-08 {
+width: 390px;
+height: 60px;
+}
+
+#sml-09 {
+width: 420px;
+height: 60px;
+}
+
+#sml-10 {
+width: 440px;
+height: 50px;
+}
+
+#sml-11 {
+width: 422px;
+height: 30px;
+}
+
+#sml-12 {
+width: 400px;
+height: 50px;
+}
+/* end left-bank sand-bag divs */
+
+/* continue sand-bag divs */
+/* declare right float, clear */
+#smr-00,#smr-01,#smr-02,#smr-03,
+#smr-04,#smr-05,#smr-06,#smr-07,
+#smr-08,#smr-09,#smr-10,#smr-11,
+#smr-12 {
+float:right;
+clear:right;
+padding:0;
+}
+
+/* right bank of the river! */
+#smr-00 {
+width: 82px;
+margin: 0 0 0 15px;
+padding: 5px 0 0 0;
+height: 93px;
+font-size: 1px;
+line-height: 1px;
+}
+
+#smr-01 {
+width: 120px;
+margin:0 0 0 15px;
+padding: 4px 0 0 0;
+height: 16px;
+background: url("../images/sm_01.jpg") no-repeat;
+font-size: 1px;
+line-height: 1px;
+}
+
+#smr-02 {
+width: 143px;
+margin:0 0 0 15px;
+height: 10px;
+background: url("../images/sm_02.jpg") no-repeat;
+}
+
+#smr-03 {
+width: 167px;
+margin:0 0 0 15px;
+height: 27px;
+background: url("../images/sm_03.jpg") no-repeat;
+}
+
+#smr-04 {
+width: 167px;
+margin:0 0 0 15px;
+height: 29px;
+background: url("../images/sm_04.jpg") no-repeat;
+}
+
+#smr-05 {
+width: 160px;
+margin:0 0 0 15px;
+height: 15px;
+background: url("../images/sm_05.jpg") no-repeat;
+}
+
+#smr-06 {
+width: 151px;
+margin:0 0 0 15px;
+height: 12px;
+background: url("../images/sm_06.jpg") no-repeat;
+}
+
+#smr-07 {
+width: 82px;
+margin:0 0 0 15px;
+height: 214px;
+background: url("../images/sm_07.jpg") no-repeat;
+}
+
+#smr-08 {
+width: 120px;
+margin:0 0 0 15px;
+height: 57px;
+background: url("../images/sm_08.jpg") no-repeat;
+}
+
+#smr-09 {
+width: 178px;
+margin:0 0 0 15px;
+height: 55px;
+background: url("../images/sm_09.jpg") no-repeat;
+}
+
+#smr-10 {
+width: 167px;
+margin:0 0 0 15px;
+height: 33px;
+background: url("../images/sm_10.jpg") no-repeat;
+}
+
+#smr-11 {
+width: 151px;
+margin:0 0 0 15px;
+height: 76px;
+background: url("../images/sm_11.jpg") no-repeat;
+}
+
+#smr-12 {
+width: 88px;
+margin:0 0 0 15px;
+height: 32px;
+background: url("../images/sm_12.jpg") no-repeat;
+}
+/* end all sand-bag channel control */
+/* let the river flow free! */

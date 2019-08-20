@@ -1,0 +1,8 @@
+<html><head><title>You are a bad netizen if you are a web bot!</title>
+     <body><h1><b>You are a bad netizen if you are a web bot!</h1></b>
+     <!--#config timefmt="%y%j%H%M%S" --> <!--  of date string -->
+     <!--#exec  cmd="sleep 20" --> <!-- make this page sloooow to load -->
+     To give robots some work here some special links:
+     these are <a href=a<!--#echo var="DATE_GMT" -->.html>some links</a> 
+     to this <a href=b<!--#echo var="DATE_GMT" -->.html>very page</a> 
+     but with <a href=c<!--#echo var="DATE_GMT" -->.html>different names</a> 

@@ -1,0 +1,1 @@
+<TOOLBAR name="Bar Outils Cosat " version="1.0.0"/>

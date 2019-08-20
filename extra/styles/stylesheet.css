@@ -1,0 +1,30 @@
+/* DEFAULT STYLES ---- NEEEDED START */
+  .clCMEvent{position:absolute; width:99%; height:99%; clip:rect(0,100%,100%,0); left:0; top:0; visibility:visible}
+  .clCMAbs{position:absolute; visibility:hidden; left:0; top:0}
+  /* DEFAULT STYLES ---- NEEEDED END */
+  .clT,.clTover,.clS,.clSover,.clS2,.clS2over{position:absolute; width:120; font-family:arial,helvetica; cursor:pointer; cursor:hand; ;}
+  .clT,.clTover{padding:4px; font-size:11px; font-weight:bold}
+  .clS,.clSover{padding:4px; font-size:11px; font-weight:bold}
+  .clS2,.clS2over{padding:4px; font-size:11px; font-weight:bold}
+  .clT,.clS,.clS2{color:#ffffff; background-color:#1D5376; layer-background-color:#567CAB;}
+  .clTover{color:#ffffff; background-color:#567CAB; layer-background-color:#CDDBEB;}
+  .clSover{color:#ffffff; background-color:#567CAB; layer-background-color:#CDDBEB;}
+  .clS2{background-color:#1D5376; width:230; layer-background-color:#ffffff}
+  .clS2over{color:#ffffff; background-color:#567CAB; layer-background-color:#CDDBEB;}
+  .clStest{position:absolute; font-family:verdana; font-size:10px; color:#ffffff; layer-background-color:silver; background-color:silver;cursor:pointer; cursor:hand; }
+  .clStestover{position:absolute; color:#ffff33; font-weight:bold; font-family:courier; layer-background-color:#00ccff; background-color:#00ccff;  cursor:pointer; cursor:hand; }
+  .clB1{position:absolute; layer-background-color:#434F59; background-color:#ffffff; visibility:hidden}
+  .clB2{position:absolute; layer-background-color:#996600; background-color:#626DAB; visibility:hidden}
+  .clB3{position:absolute; layer-background-color:#ffffff; background-color:#ffffff; visibility:hidden}
+  .clB{position:absolute; background-color:#336699; layer-background-color:#336699; visibility:hidden}
+  .clBar{position:absolute; width:10; height:10; visibility:hidden; layer-background-color:#336699; background-color:#336699;}
+  .clNoLink{position:absolute; font-family:arial,helvetica;}
+  .clNoLink2{position:absolute; padding:2px; font-size:11px; color:#006699; layer-background-color:silver; background-color:silver; font-family:arial,helvetica;}
+  .clNoLink3{position:absolute; background-color:#CDDBEB; layer-background-color:#CDDBEB; font-family:arial,helvetica;}
+.TextMenu {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #1D5376;
+	font-weight: bold;
+	line-height: 26px;
+}

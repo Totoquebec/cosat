@@ -1,0 +1,41 @@
+/* 
+    BUT : Feuille de style du traitement des lettres reçues
+	AUTEUR : Denis Léveillé    DATE : 04-02-12
+*/
+
+BODY { background: #EEEEFF !important ; color: #000000 !important ;  } 
+
+table, tr, th, thead, tbody, tfoot { color: inherit !important ; background: inherit !important ; } 
+
+BODY { font-family: arial !important; }
+* { font-family: arial !important; }
+
+BODY { font-size: 8pt !important; }
+ * { font-size: 8pt !important; }
+
+big { font-size: larger !important; }
+small { font-size: smaller !important; }
+
+td {
+    height: 18px; padding-top: 0px; padding-bottom: 0px; padding: 0px; 
+}
+
+.tdbas {
+  font-size: smaller; height: 20px; padding-top: 0px; padding-bottom: 0px; padding: 0px; 
+}
+
+.inputvoid { 
+			 font-style:italic; font-weight:normal; background-color: #CCCCCC 
+}
+
+.inputview { 
+			 font-weight:bold; background-color: #CCCCCC;  text-align: center 
+}
+
+.boutChx {
+		 font-style:italic; font-weight:bold;
+}
+
+:focus  { outline: groove }
+active { outline: thick solid red }
+	

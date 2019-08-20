@@ -1,0 +1,2 @@
+#Ads.txt cosat.biz
+contact=tempo@cosat.biz
